@@ -1,37 +1,22 @@
-#ignore thumbnails created by windows
-Thumbs.db
-#Ignore files build by Visual Studio
-*.obj
-*.pdb
-*.user
-*.aps
-*.pch
-*.vspscc
-*_i.c
-*_p.c
-*.ncb
-*.suo
-*.tlb
-*.tlh
-*.bak
-*.cache
-*.ilk
-*.log
-*.suo
-[Bb]in
-[Dd]ebug*/
-*.lib
-*.sbr
-obj/
-[Rr]elease*/
-_ReSharper*/
-[Tt]est[Rr]esult*
-/packages
-/Exceptional.sln.ide
-/Exceptional.sln.GhostDoc.xml
-/src/packages
-.vs/
-.vscode/
-pack/
+# Build artifacts
+[Bb]in/
+[Oo]bj/
+build
+output
+.gradle
+.tmp
 
-!build/MSBuildTasks/**
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+*.cache
+
+# IDEs
+/.idea/*.iml
+/.idea/*.xml
+/.idea/.idea.*/*.iml
+/.idea/.idea.*/.idea/*.xml
+.vs
+_ReSharper*
+_dotTrace*
