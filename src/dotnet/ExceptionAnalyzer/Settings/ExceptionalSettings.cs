@@ -6,58 +6,58 @@ using JetBrains.Application.Settings.WellKnownRootKeys;
 using JetBrains.ReSharper.Psi;
 using JetBrains.Util.Logging;
 
-namespace ReSharper.Exceptional.Settings
+namespace ReSharper.Exceptional.Settings;
+
+[SettingsKey(typeof(EnvironmentSettings), "Exceptional Settings")]
+public class ExceptionalSettings
 {
-    [SettingsKey(typeof(EnvironmentSettings), "Exceptional Settings")]
-    public class ExceptionalSettings
-    {
-        [SettingsEntry(true, "Inspect public methods")]
-        public bool InspectPublicMethods { get; set; }
+    [SettingsEntry(true, "Inspect public methods")]
+    public bool InspectPublicMethods { get; set; }
 
-        [SettingsEntry(true, "Inspect internal methods")]
-        public bool InspectInternalMethods { get; set; }
+    [SettingsEntry(true, "Inspect internal methods")]
+    public bool InspectInternalMethods { get; set; }
 
-        [SettingsEntry(true, "Inspect protected methods")]
-        public bool InspectProtectedMethods { get; set; }
+    [SettingsEntry(true, "Inspect protected methods")]
+    public bool InspectProtectedMethods { get; set; }
 
-        [SettingsEntry(false, "Inspect private methods")]
-        public bool InspectPrivateMethods { get; set; }
+    [SettingsEntry(false, "Inspect private methods")]
+    public bool InspectPrivateMethods { get; set; }
 
 
-        [SettingsEntry(true, "Delegate invocations may throw System.Exception")]
-        public bool DelegateInvocationsMayThrowExceptions { get; set; }
+    [SettingsEntry(true, "Delegate invocations may throw System.Exception")]
+    public bool DelegateInvocationsMayThrowExceptions { get; set; }
 
 
-        [SettingsEntry(false, "Is documentation of exception subtype sufficient for throw statements")]
-        public bool IsDocumentationOfExceptionSubtypeSufficientForThrowStatements { get; set; }
+    [SettingsEntry(false, "Is documentation of exception subtype sufficient for throw statements")]
+    public bool IsDocumentationOfExceptionSubtypeSufficientForThrowStatements { get; set; }
 
-        [SettingsEntry(false, "Is documentation of exception subtype sufficient for reference expressions")]
-        public bool IsDocumentationOfExceptionSubtypeSufficientForReferenceExpressions { get; set; }
-
-
-        [SettingsEntry("", "Optional exceptions")]
-        public string OptionalExceptions2 { get; set; }
-
-        [SettingsEntry(true, "Use default optional exceptions")]
-        public bool UseDefaultOptionalExceptions2 { get; set; }
+    [SettingsEntry(false, "Is documentation of exception subtype sufficient for reference expressions")]
+    public bool IsDocumentationOfExceptionSubtypeSufficientForReferenceExpressions { get; set; }
 
 
-        [SettingsEntry("", "Optional method exceptions")]
-        public string OptionalMethodExceptions2 { get; set; }
+    [SettingsEntry("", "Optional exceptions")]
+    public string OptionalExceptions2 { get; set; }
 
-        [SettingsEntry(true, "Use default optional method exceptions")]
-        public bool UseDefaultOptionalMethodExceptions2 { get; set; }
-
-
-        [SettingsEntry("", "Accessor overrides")]
-        public string AccessorOverrides2 { get; set; }
-
-        [SettingsEntry(true, "Use default accessor overrides")]
-        public bool UseDefaultAccessorOverrides2 { get; set; }
+    [SettingsEntry(true, "Use default optional exceptions")]
+    public bool UseDefaultOptionalExceptions2 { get; set; }
 
 
-        public const string DefaultOptionalExceptions =
-@"
+    [SettingsEntry("", "Optional method exceptions")]
+    public string OptionalMethodExceptions2 { get; set; }
+
+    [SettingsEntry(true, "Use default optional method exceptions")]
+    public bool UseDefaultOptionalMethodExceptions2 { get; set; }
+
+
+    [SettingsEntry("", "Accessor overrides")]
+    public string AccessorOverrides2 { get; set; }
+
+    [SettingsEntry(true, "Use default accessor overrides")]
+    public bool UseDefaultAccessorOverrides2 { get; set; }
+
+
+    public const string DefaultOptionalExceptions =
+        @"
 -- Contracts
 System.ArgumentException,InvocationOnly
 System.InvalidOperationException,InvocationOnly
@@ -73,8 +73,8 @@ System.NotImplementedException,ThrowOnly
 -- Unit testing
 Microsoft.VisualStudio.TestTools.UnitTesting.AssertFailedException,InvocationOnly";
 
-        public const string DefaultOptionalMethodExceptions =
-@"
+    public const string DefaultOptionalMethodExceptions =
+        @"
 System.Collections.IDictionary.Add,System.NotSupportedException
 System.Nullable.Value,System.InvalidOperationException
 System.Windows.DependencyObject.GetValue,System.InvalidOperationException
@@ -82,16 +82,16 @@ System.Windows.DependencyObject.SetValue,System.InvalidOperationException
 System.Console.WriteLine,System.IO.IOException
 System.Linq.Enumerable.Count,System.OverflowException";
 
-        public const string DefaultAccessorOverrides =
-@"
+    public const string DefaultAccessorOverrides =
+        @"
 System.Collections.Generic.Dictionary.Item,System.Collections.Generic.KeyNotFoundException,get";
 
-        private List<OptionalExceptionConfiguration> _optionalExceptionsCache = null;
-        private List<OptionalMethodExceptionConfiguration> _optionalMethodExceptionsCache = null;
-        private List<ExceptionAccessorOverride> _exceptionAccessorOverridesCache = null;
+    private List<OptionalExceptionConfiguration> _optionalExceptionsCache = null;
+    private List<OptionalMethodExceptionConfiguration> _optionalMethodExceptionsCache = null;
+    private List<ExceptionAccessorOverride> _exceptionAccessorOverridesCache = null;
 
-        public void InvalidateCaches()
-        {
+    public void InvalidateCaches()
+    {
             lock (typeof(ExceptionalSettings))
             {
                 _optionalExceptionsCache = null;
@@ -99,8 +99,8 @@ System.Collections.Generic.Dictionary.Item,System.Collections.Generic.KeyNotFoun
             }
         }
 
-        public IEnumerable<OptionalExceptionConfiguration> GetOptionalExceptions()
-        {
+    public IEnumerable<OptionalExceptionConfiguration> GetOptionalExceptions()
+    {
             if (_optionalExceptionsCache == null)
             {
                 lock (typeof(ExceptionalSettings))
@@ -112,8 +112,8 @@ System.Collections.Generic.Dictionary.Item,System.Collections.Generic.KeyNotFoun
             return _optionalExceptionsCache;
         }
 
-        public IEnumerable<OptionalMethodExceptionConfiguration> GetOptionalMethodExceptions()
-        {
+    public IEnumerable<OptionalMethodExceptionConfiguration> GetOptionalMethodExceptions()
+    {
             if (_optionalMethodExceptionsCache == null)
             {
                 lock (typeof(ExceptionalSettings))
@@ -125,8 +125,8 @@ System.Collections.Generic.Dictionary.Item,System.Collections.Generic.KeyNotFoun
             return _optionalMethodExceptionsCache;
         }
 
-        public IEnumerable<ExceptionAccessorOverride> GetExceptionAccessorOverrides()
-        {
+    public IEnumerable<ExceptionAccessorOverride> GetExceptionAccessorOverrides()
+    {
             if (_exceptionAccessorOverridesCache == null)
             {
                 lock (typeof(ExceptionalSettings))
@@ -138,8 +138,8 @@ System.Collections.Generic.Dictionary.Item,System.Collections.Generic.KeyNotFoun
             return _exceptionAccessorOverridesCache;
         }
 
-        private List<OptionalExceptionConfiguration> LoadOptionalExceptions()
-        {
+    private List<OptionalExceptionConfiguration> LoadOptionalExceptions()
+    {
             var list = new List<OptionalExceptionConfiguration>();
             var value = UseDefaultOptionalExceptions2 ? OptionalExceptions2 + DefaultOptionalExceptions : OptionalExceptions2;
             foreach (var line in value.Replace("\r", "").Split('\n').Where(n => !string.IsNullOrEmpty(n)))
@@ -151,8 +151,8 @@ System.Collections.Generic.Dictionary.Item,System.Collections.Generic.KeyNotFoun
             return list;
         }
 
-        private List<OptionalMethodExceptionConfiguration> LoadOptionalMethodExceptions()
-        {
+    private List<OptionalMethodExceptionConfiguration> LoadOptionalMethodExceptions()
+    {
             var list = new List<OptionalMethodExceptionConfiguration>();
             var value = UseDefaultOptionalMethodExceptions2 ? OptionalMethodExceptions2 + DefaultOptionalMethodExceptions : OptionalMethodExceptions2;
             foreach (var line in value.Replace("\r", "").Split('\n').Where(n => !string.IsNullOrEmpty(n)))
@@ -164,8 +164,8 @@ System.Collections.Generic.Dictionary.Item,System.Collections.Generic.KeyNotFoun
             return list;
         }
 
-        private List<ExceptionAccessorOverride> LoadExceptionAccessorOverrides()
-        {
+    private List<ExceptionAccessorOverride> LoadExceptionAccessorOverrides()
+    {
             var list = new List<ExceptionAccessorOverride>();
             var value = UseDefaultAccessorOverrides2 ? AccessorOverrides2 + DefaultAccessorOverrides : AccessorOverrides2;
             foreach (var line in value.Replace("\r", "").Split('\n').Where(n => !string.IsNullOrEmpty(n)))
@@ -177,8 +177,8 @@ System.Collections.Generic.Dictionary.Item,System.Collections.Generic.KeyNotFoun
             return list;
         }
 
-        private static OptionalExceptionConfiguration TryLoadOptionalException(string line)
-        {
+    private static OptionalExceptionConfiguration TryLoadOptionalException(string line)
+    {
             try
             {
                 var arr = line.Split(',');
@@ -198,20 +198,19 @@ System.Collections.Generic.Dictionary.Item,System.Collections.Generic.KeyNotFoun
             return null;
         }
 
-        private static OptionalMethodExceptionConfiguration TryLoadOptionalMethodException(string line)
-        {
+    private static OptionalMethodExceptionConfiguration TryLoadOptionalMethodException(string line)
+    {
             var arr = line.Split(',');
             if (arr.Length == 2)
                 return new OptionalMethodExceptionConfiguration(arr[0], arr[1]);
             return null;
         }
 
-        private static ExceptionAccessorOverride TryExceptionAccessorOverride(string line)
-        {
+    private static ExceptionAccessorOverride TryExceptionAccessorOverride(string line)
+    {
             var arr = line.Split(',');
             if (arr.Length == 3)
                 return new ExceptionAccessorOverride(arr[0], arr[1], arr[2]);
             return null;
         }
-    }
 }

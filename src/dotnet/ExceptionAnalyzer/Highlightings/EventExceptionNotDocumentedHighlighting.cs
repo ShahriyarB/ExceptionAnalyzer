@@ -4,29 +4,28 @@ using ReSharper.Exceptional.Models;
 
 using JetBrains.ReSharper.Feature.Services.Daemon;
 
-namespace ReSharper.Exceptional.Highlightings
+namespace ReSharper.Exceptional.Highlightings;
+
+[RegisterConfigurableSeverity(Id, Constants.CompoundName, HighlightingGroupIds.BestPractice,
+    "Exceptional.EventExceptionNotDocumented",
+    "Exceptional.EventExceptionNotDocumented",
+    Severity.WARNING
+)]
+[ConfigurableSeverityHighlighting(Id, CSharpLanguage.Name)]
+public class EventExceptionNotDocumentedHighlighting : ExceptionNotDocumentedHighlighting
 {
-    [RegisterConfigurableSeverity(Id, Constants.CompoundName, HighlightingGroupIds.BestPractice,
-        "Exceptional.EventExceptionNotDocumented",
-        "Exceptional.EventExceptionNotDocumented",
-        Severity.WARNING
-    )]
-    [ConfigurableSeverityHighlighting(Id, CSharpLanguage.Name)]
-    public class EventExceptionNotDocumentedHighlighting : ExceptionNotDocumentedHighlighting
+    public new const string Id = "EventExceptionNotDocumented";
+
+    /// <summary>Initializes a new instance of the <see cref="EventExceptionNotDocumentedHighlighting"/> class. </summary>
+    /// <param name="thrownException">The thrown exception. </param>
+    internal EventExceptionNotDocumentedHighlighting(ThrownExceptionModel thrownException)
+        : base(thrownException)
     {
-        public new const string Id = "EventExceptionNotDocumented";
+    }
 
-        /// <summary>Initializes a new instance of the <see cref="EventExceptionNotDocumentedHighlighting"/> class. </summary>
-        /// <param name="thrownException">The thrown exception. </param>
-        internal EventExceptionNotDocumentedHighlighting(ThrownExceptionModel thrownException)
-            : base(thrownException)
-        {
-        }
-
-        /// <summary>Gets the message which is shown in the editor. </summary>
-        protected override string Message
-        {
-            get { return AnalyzerResources.HighlightEventNotDocumentedExceptions; }
-        }
+    /// <summary>Gets the message which is shown in the editor. </summary>
+    protected override string Message
+    {
+        get { return AnalyzerResources.HighlightEventNotDocumentedExceptions; }
     }
 }

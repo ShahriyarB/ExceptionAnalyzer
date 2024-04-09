@@ -6,34 +6,34 @@ using JetBrains.ReSharper.Psi.ExtensionsAPI;
 using JetBrains.ReSharper.Psi.Tree;
 using ReSharper.Exceptional.Utilities;
 
-namespace ReSharper.Exceptional.Models.ExceptionsOrigins
+namespace ReSharper.Exceptional.Models.ExceptionsOrigins;
+
+internal abstract class ExpressionExceptionsOriginModelBase<T> : TreeElementModelBase<T>, IExceptionsOriginModel
+    where T : ICSharpExpression
 {
-    internal abstract class ExpressionExceptionsOriginModelBase<T> : TreeElementModelBase<T>, IExceptionsOriginModel
-        where T : ICSharpExpression
+    protected ExpressionExceptionsOriginModelBase(IAnalyzeUnit analyzeUnit, T node, IBlockModel containingBlock)
+        : base(analyzeUnit, node)
     {
-        protected ExpressionExceptionsOriginModelBase(IAnalyzeUnit analyzeUnit, T node, IBlockModel containingBlock)
-            : base(analyzeUnit, node)
-        {
             ContainingBlock = containingBlock;
         }
 
-        /// <summary>Gets the list of exception which can be thrown from this object. </summary>
-        public abstract IEnumerable<ThrownExceptionModel> ThrownExceptions { get; }
+    /// <summary>Gets the list of exception which can be thrown from this object. </summary>
+    public abstract IEnumerable<ThrownExceptionModel> ThrownExceptions { get; }
 
-        /// <summary>Gets the parent block which contains this block. </summary>
-        public IBlockModel ContainingBlock { get; private set; }
+    /// <summary>Gets the parent block which contains this block. </summary>
+    public IBlockModel ContainingBlock { get; private set; }
 
-        /// <summary>Gets the node. </summary>
-        ITreeNode IExceptionsOriginModel.Node
-        {
-            get { return Node; }
-        }
+    /// <summary>Gets the node. </summary>
+    ITreeNode IExceptionsOriginModel.Node
+    {
+        get { return Node; }
+    }
 
-        /// <summary>Creates a try-catch block around this block. </summary>
-        /// <param name="exceptionType">The exception type to catch. </param>
-        /// <returns><c>true</c> if the try-catch block could be created; otherwise, <c>false</c>. </returns>
-        public bool SurroundWithTryBlock(IDeclaredType exceptionType)
-        {
+    /// <summary>Creates a try-catch block around this block. </summary>
+    /// <param name="exceptionType">The exception type to catch. </param>
+    /// <returns><c>true</c> if the try-catch block could be created; otherwise, <c>false</c>. </returns>
+    public bool SurroundWithTryBlock(IDeclaredType exceptionType)
+    {
             var containingStatement = Node.GetContainingStatement();
             if (containingStatement != null && containingStatement.LastChild != null)
             {
@@ -53,5 +53,4 @@ namespace ReSharper.Exceptional.Models.ExceptionsOrigins
             }
             return false;
         }
-    }
 }

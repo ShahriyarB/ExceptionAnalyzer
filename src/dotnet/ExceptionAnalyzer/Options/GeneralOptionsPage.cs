@@ -5,23 +5,23 @@ using JetBrains.DataFlow;
 using JetBrains.IDE.UI.Options;
 using JetBrains.Lifetimes;
 
-namespace ReSharper.Exceptional.Options
-{
-    [OptionsPage(Pid, Name, typeof(UnnamedThemedIcons.ExceptionalSettings), ParentId = ExceptionalOptionsPage.Pid, Sequence = 0.0)]
-    public class GeneralOptionsPage : BeSimpleOptionsPage
-    {
-        public const string Pid = "Exceptional::General";
-        public const string Name = "General";
+namespace ReSharper.Exceptional.Options;
 
-        public GeneralOptionsPage(Lifetime lifetime, OptionsPageContext optionsPageContext, OptionsSettingsSmartContext optionsSettingsSmartContext, bool wrapInScrollablePanel = false) : base(lifetime, optionsPageContext, optionsSettingsSmartContext, wrapInScrollablePanel)
-        {
+[OptionsPage(Pid, Name, typeof(UnnamedThemedIcons.ExceptionalSettings), ParentId = ExceptionalOptionsPage.Pid, Sequence = 0.0)]
+public class GeneralOptionsPage : BeSimpleOptionsPage
+{
+    public const string Pid = "Exceptional::General";
+    public const string Name = "General";
+
+    public GeneralOptionsPage(Lifetime lifetime, OptionsPageContext optionsPageContext, OptionsSettingsSmartContext optionsSettingsSmartContext, bool wrapInScrollablePanel = false) : base(lifetime, optionsPageContext, optionsSettingsSmartContext, wrapInScrollablePanel)
+    {
             CreateCheckboxInspectPublic(lifetime, optionsSettingsSmartContext.StoreOptionsTransactionContext);
 
             CreateDocumentationSection(lifetime, optionsSettingsSmartContext.StoreOptionsTransactionContext);
         }
 
-        private void CreateCheckboxInspectPublic(Lifetime lifetime, IContextBoundSettingsStoreLive storeOptionsTransactionContext)
-        {
+    private void CreateCheckboxInspectPublic(Lifetime lifetime, IContextBoundSettingsStoreLive storeOptionsTransactionContext)
+    {
             IProperty<bool> property = new Property<bool>(lifetime, "Exceptional::General::DelegateInvocationsMayThrowSystemException");
             property.SetValue(storeOptionsTransactionContext.GetValue((Settings.ExceptionalSettings key) => key.DelegateInvocationsMayThrowExceptions));
 
@@ -35,16 +35,16 @@ namespace ReSharper.Exceptional.Options
             AddBoolOption((Settings.ExceptionalSettings key) => key.DelegateInvocationsMayThrowExceptions, OptionsLabels.General.DelegateInvocationsMayThrowSystemException);
         }
 
-        private void CreateDocumentationSection(Lifetime lifetime, IContextBoundSettingsStoreLive storeOptionsTransactionContext)
-        {
+    private void CreateDocumentationSection(Lifetime lifetime, IContextBoundSettingsStoreLive storeOptionsTransactionContext)
+    {
             AddHeader(OptionsLabels.General.DocumentationOfThrownExceptionsSubtypeHeader);
 
             CreateCheckboxIsDocumentationOfExceptionSubtypeSufficientForThrowStatements(lifetime, storeOptionsTransactionContext);
             CreateCheckboxIsDocumentationOfExceptionSubtypeSufficientForReferenceExpressions(lifetime, storeOptionsTransactionContext);
         }
 
-        private void CreateCheckboxIsDocumentationOfExceptionSubtypeSufficientForThrowStatements(Lifetime lifetime, IContextBoundSettingsStoreLive storeOptionsTransactionContext)
-        {
+    private void CreateCheckboxIsDocumentationOfExceptionSubtypeSufficientForThrowStatements(Lifetime lifetime, IContextBoundSettingsStoreLive storeOptionsTransactionContext)
+    {
             IProperty<bool> property = new Property<bool>(lifetime, "Exceptional::General::IsDocumentationOfExceptionSubtypeSufficientForThrowStatements");
             property.SetValue(storeOptionsTransactionContext.GetValue((Settings.ExceptionalSettings key) => key.IsDocumentationOfExceptionSubtypeSufficientForThrowStatements));
 
@@ -58,8 +58,8 @@ namespace ReSharper.Exceptional.Options
             AddBoolOption((Settings.ExceptionalSettings key) => key.IsDocumentationOfExceptionSubtypeSufficientForThrowStatements, OptionsLabels.General.IsDocumentationOfExceptionSubtypeSufficientForThrowStatements);
         }
 
-        private void CreateCheckboxIsDocumentationOfExceptionSubtypeSufficientForReferenceExpressions(Lifetime lifetime, IContextBoundSettingsStoreLive storeOptionsTransactionContext)
-        {
+    private void CreateCheckboxIsDocumentationOfExceptionSubtypeSufficientForReferenceExpressions(Lifetime lifetime, IContextBoundSettingsStoreLive storeOptionsTransactionContext)
+    {
             IProperty<bool> property = new Property<bool>(lifetime, "Exceptional::General::IsDocumentationOfExceptionSubtypeSufficientForReferenceExpressions");
             property.SetValue(storeOptionsTransactionContext.GetValue((Settings.ExceptionalSettings key) => key.IsDocumentationOfExceptionSubtypeSufficientForReferenceExpressions));
 
@@ -72,5 +72,4 @@ namespace ReSharper.Exceptional.Options
 
             AddBoolOption((Settings.ExceptionalSettings key) => key.IsDocumentationOfExceptionSubtypeSufficientForReferenceExpressions, OptionsLabels.General.IsDocumentationOfExceptionSubtypeSufficientForReferenceExpressions);
         }
-    }
 }

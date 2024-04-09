@@ -1,8 +1,7 @@
 using ReSharper.Exceptional.Models;
 
-namespace ReSharper.Exceptional.Contexts
+namespace ReSharper.Exceptional.Contexts;
+
+internal class MethodProcessContext : ProcessContext<MethodDeclarationModel>
 {
-    internal class MethodProcessContext : ProcessContext<MethodDeclarationModel>
-    {
-    }
 }

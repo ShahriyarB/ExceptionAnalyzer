@@ -7,13 +7,13 @@ using JetBrains.ReSharper.Psi.Naming.Impl;
 using JetBrains.ReSharper.Psi.Naming.Settings;
 using JetBrains.ReSharper.Psi.Tree;
 
-namespace ReSharper.Exceptional.Utilities
+namespace ReSharper.Exceptional.Utilities;
+
+/// <summary>Aids in creating names for code elements.</summary>
+public static class NameFactory
 {
-    /// <summary>Aids in creating names for code elements.</summary>
-    public static class NameFactory
+    public static string CatchVariableName(ITreeNode treeNode, IDeclaredType exceptionType)
     {
-        public static string CatchVariableName(ITreeNode treeNode, IDeclaredType exceptionType)
-        {
             var namingPolicyManager = new NamingPolicyManager(LanguageManager.Instance, treeNode.GetSolution());
             var nameParser = new NameParser(treeNode.GetSolution(), namingPolicyManager, new HostCulture());
             var nameSuggestionManager = new NameSuggestionManager(treeNode.GetSolution(), nameParser, namingPolicyManager);
@@ -42,5 +42,4 @@ namespace ReSharper.Exceptional.Utilities
                 return String.Empty;
             }
         }
-    }
 }

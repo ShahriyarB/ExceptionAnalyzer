@@ -11,38 +11,38 @@ using JetBrains.ReSharper.Psi.Tree;
 using ReSharper.Exceptional.Analyzers;
 using ReSharper.Exceptional.Models.ExceptionsOrigins;
 
-namespace ReSharper.Exceptional.Models
-{
-    /// <summary>Stores data about processed <see cref="IDocCommentBlockNode"/>. </summary>
-    internal class DocCommentBlockModel : TreeElementModelBase<IDocCommentBlock>
-    {
-        private string _documentationText;
+namespace ReSharper.Exceptional.Models;
 
-        public DocCommentBlockModel(IAnalyzeUnit analyzeUnit, IDocCommentBlock docCommentNode)
-            : base(analyzeUnit, docCommentNode)
-        {
+/// <summary>Stores data about processed <see cref="IDocCommentBlockNode"/>. </summary>
+internal class DocCommentBlockModel : TreeElementModelBase<IDocCommentBlock>
+{
+    private string _documentationText;
+
+    public DocCommentBlockModel(IAnalyzeUnit analyzeUnit, IDocCommentBlock docCommentNode)
+        : base(analyzeUnit, docCommentNode)
+    {
             References = new List<IReference>();
             DocumentedExceptions = new List<ExceptionDocCommentModel>();
             Update();
         }
 
-        public bool IsCreated
-        {
-            get { return Node != null; }
-        }
+    public bool IsCreated
+    {
+        get { return Node != null; }
+    }
 
-        public List<IReference> References { get; private set; }
+    public List<IReference> References { get; private set; }
 
-        public IEnumerable<ExceptionDocCommentModel> DocumentedExceptions { get; private set; }
+    public IEnumerable<ExceptionDocCommentModel> DocumentedExceptions { get; private set; }
 
-        public override void Accept(AnalyzerBase analyzer)
-        {
+    public override void Accept(AnalyzerBase analyzer)
+    {
             foreach (var exception in DocumentedExceptions)
                 exception.Accept(analyzer);
         }
 
-        public ExceptionDocCommentModel AddExceptionDocumentation(ThrownExceptionModel thrownException, IProgressIndicator progressIndicator)
-        {
+    public ExceptionDocCommentModel AddExceptionDocumentation(ThrownExceptionModel thrownException, IProgressIndicator progressIndicator)
+    {
             if (thrownException.ExceptionType == null)
                 return null;
 
@@ -73,8 +73,8 @@ namespace ReSharper.Exceptional.Models
             return DocumentedExceptions.LastOrDefault();
         }
 
-        public void RemoveExceptionDocumentation(ExceptionDocCommentModel exceptionDocumentation, IProgressIndicator progress)
-        {
+    public void RemoveExceptionDocumentation(ExceptionDocCommentModel exceptionDocumentation, IProgressIndicator progress)
+    {
             if (exceptionDocumentation == null)
                 return;
 
@@ -87,8 +87,8 @@ namespace ReSharper.Exceptional.Models
             ChangeDocumentation(newDocumentation);
         }
 
-        private void ChangeDocumentation(string text)
-        {
+    private void ChangeDocumentation(string text)
+    {
             text = text.Trim('\r', '\n');
 
             if (!string.IsNullOrEmpty(text))
@@ -111,8 +111,8 @@ namespace ReSharper.Exceptional.Models
             Update();
         }
 
-        private void Update()
-        {
+    private void Update()
+    {
             if (!IsCreated)
             {
                 _documentationText = string.Empty;
@@ -129,8 +129,8 @@ namespace ReSharper.Exceptional.Models
             }
         }
 
-        private IEnumerable<ExceptionDocCommentModel> GetDocumentedExceptions()
-        {
+    private IEnumerable<ExceptionDocCommentModel> GetDocumentedExceptions()
+    {
             var regex = new Regex("<exception cref=\"(.*?)\"( accessor=\"(.*?)\")?(>((\r|\n|.)*?)</exception>)?");
             var exceptions = new List<ExceptionDocCommentModel>();
             foreach (Match match in regex.Matches(_documentationText))
@@ -144,12 +144,11 @@ namespace ReSharper.Exceptional.Models
             return exceptions;
         }
 
-        private string GetDocumentationXml()
-        {
+    private string GetDocumentationXml()
+    {
             var xml = string.Empty;
             foreach (var node in Node.Children().OfType<IDocCommentNode>())
                 xml += node.GetText().Replace("/// ", "").Replace("///", "") + "\n";
             return xml;
         }
-    }
 }

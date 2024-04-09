@@ -8,16 +8,16 @@ using JetBrains.Lifetimes;
 using JetBrains.Rd.Base;
 using JetBrains.Util;
 
-namespace ReSharper.Exceptional.Options
-{
-    [OptionsPage(Pid, Name, typeof(UnnamedThemedIcons.ExceptionalSettings), ParentId = ExceptionalOptionsPage.Pid, Sequence = 3.0)]
-    public class ExceptionTypesAsHintForMethodOrPropertyOptionsPage : BeSimpleOptionsPage
-    {
-        public const string Pid = "Exceptional::ExceptionTypesAsHintForMethodsOrProperties";
-        public const string Name = "Optional Exceptions (Methods or Properties)";
+namespace ReSharper.Exceptional.Options;
 
-        public ExceptionTypesAsHintForMethodOrPropertyOptionsPage(Lifetime lifetime, OptionsPageContext optionsPageContext, OptionsSettingsSmartContext optionsSettingsSmartContext, bool wrapInScrollablePanel = true) : base(lifetime, optionsPageContext, optionsSettingsSmartContext, wrapInScrollablePanel)
-        {
+[OptionsPage(Pid, Name, typeof(UnnamedThemedIcons.ExceptionalSettings), ParentId = ExceptionalOptionsPage.Pid, Sequence = 3.0)]
+public class ExceptionTypesAsHintForMethodOrPropertyOptionsPage : BeSimpleOptionsPage
+{
+    public const string Pid = "Exceptional::ExceptionTypesAsHintForMethodsOrProperties";
+    public const string Name = "Optional Exceptions (Methods or Properties)";
+
+    public ExceptionTypesAsHintForMethodOrPropertyOptionsPage(Lifetime lifetime, OptionsPageContext optionsPageContext, OptionsSettingsSmartContext optionsSettingsSmartContext, bool wrapInScrollablePanel = true) : base(lifetime, optionsPageContext, optionsSettingsSmartContext, wrapInScrollablePanel)
+    {
             AddText(OptionsLabels.ExceptionTypesAsHintForMethodOrProperty.Description);
 
             CreateCheckboxUsePredefined(lifetime, optionsSettingsSmartContext.StoreOptionsTransactionContext);
@@ -30,15 +30,15 @@ namespace ReSharper.Exceptional.Options
             CreateRichTextExceptionTypesAsHint(lifetime, optionsSettingsSmartContext.StoreOptionsTransactionContext);
         }
 
-        private void ShowPredefined()
-        {
+    private void ShowPredefined()
+    {
             string content = ReSharper.Exceptional.Settings.ExceptionalSettings.DefaultOptionalMethodExceptions;
 
             MessageBox.ShowInfo(content);
         }
 
-        private void CreateCheckboxUsePredefined(Lifetime lifetime, IContextBoundSettingsStoreLive storeOptionsTransactionContext)
-        {
+    private void CreateCheckboxUsePredefined(Lifetime lifetime, IContextBoundSettingsStoreLive storeOptionsTransactionContext)
+    {
             IProperty<bool> property = new Property<bool>(lifetime, "Exceptional::ExceptionTypesAsHintForMethodsOrProperties::UsePredefined");
             property.SetValue(storeOptionsTransactionContext.GetValue((Settings.ExceptionalSettings key) => key.UseDefaultOptionalMethodExceptions2));
 
@@ -52,8 +52,8 @@ namespace ReSharper.Exceptional.Options
             AddBoolOption((Settings.ExceptionalSettings key) => key.UseDefaultOptionalMethodExceptions2, OptionsLabels.ExceptionTypesAsHintForMethodOrProperty.UsePredefined);
         }
 
-        private void CreateRichTextExceptionTypesAsHint(Lifetime lifetime, IContextBoundSettingsStoreLive storeOptionsTransactionContext)
-        {
+    private void CreateRichTextExceptionTypesAsHint(Lifetime lifetime, IContextBoundSettingsStoreLive storeOptionsTransactionContext)
+    {
             IProperty<string> property = new Property<string>(lifetime, "Exceptional::ExceptionTypesAsHintForMethodsOrProperties::ExceptionTypes");
             property.SetValue(storeOptionsTransactionContext.GetValue((Settings.ExceptionalSettings key) => key.OptionalMethodExceptions2));
 
@@ -74,5 +74,4 @@ namespace ReSharper.Exceptional.Options
 
             AddControl(textControl);
         }
-    }
 }

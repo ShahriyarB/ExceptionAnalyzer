@@ -2,18 +2,17 @@ using JetBrains.ReSharper.Psi.Modules;
 using JetBrains.ReSharper.Psi.Tree;
 using ReSharper.Exceptional.Analyzers;
 
-namespace ReSharper.Exceptional.Models
+namespace ReSharper.Exceptional.Models;
+
+internal interface IAnalyzeUnit : IBlockModel
 {
-    internal interface IAnalyzeUnit : IBlockModel
-    {
-        ITreeNode Node { get; }
+    ITreeNode Node { get; }
 
-        IPsiModule GetPsiModule();
+    IPsiModule GetPsiModule();
 
-        DocCommentBlockModel DocumentationBlock { get; set; }
+    DocCommentBlockModel DocumentationBlock { get; set; }
 
-        bool IsInspectionRequired { get; }
+    bool IsInspectionRequired { get; }
 
-        void Accept(AnalyzerBase analyzer);
-    }
+    void Accept(AnalyzerBase analyzer);
 }

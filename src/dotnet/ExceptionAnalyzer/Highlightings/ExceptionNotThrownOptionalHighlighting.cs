@@ -4,36 +4,35 @@ using JetBrains.ReSharper.Psi.CSharp;
 using ReSharper.Exceptional.Models;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 
-namespace ReSharper.Exceptional.Highlightings
+namespace ReSharper.Exceptional.Highlightings;
+
+[RegisterConfigurableSeverity(Id, Constants.CompoundName, HighlightingGroupIds.BestPractice,
+    "Exceptional.ExceptionNotThrownOptional",
+    "Exceptional.ExceptionNotThrownOptional",
+    Severity.HINT
+)]
+[ConfigurableSeverityHighlighting(Id, CSharpLanguage.Name)]
+public class ExceptionNotThrownOptionalHighlighting : HighlightingBase
 {
-    [RegisterConfigurableSeverity(Id, Constants.CompoundName, HighlightingGroupIds.BestPractice,
-        "Exceptional.ExceptionNotThrownOptional",
-        "Exceptional.ExceptionNotThrownOptional",
-        Severity.HINT
-    )]
-    [ConfigurableSeverityHighlighting(Id, CSharpLanguage.Name)]
-    public class ExceptionNotThrownOptionalHighlighting : HighlightingBase
+    public const string Id = "ExceptionNotThrownOptional";
+
+    /// <summary>Initializes a new instance of the <see cref="ExceptionNotThrownOptionalHighlighting"/> class. </summary>
+    /// <param name="exceptionDocumentation">The exception documentation. </param>
+    internal ExceptionNotThrownOptionalHighlighting(ExceptionDocCommentModel exceptionDocumentation)
     {
-        public const string Id = "ExceptionNotThrownOptional";
+        ExceptionDocumentation = exceptionDocumentation;
+    }
 
-        /// <summary>Initializes a new instance of the <see cref="ExceptionNotThrownOptionalHighlighting"/> class. </summary>
-        /// <param name="exceptionDocumentation">The exception documentation. </param>
-        internal ExceptionNotThrownOptionalHighlighting(ExceptionDocCommentModel exceptionDocumentation)
+    /// <summary>Gets the exception documentation. </summary>
+    internal ExceptionDocCommentModel ExceptionDocumentation { get; private set; }
+
+    /// <summary>Gets the message which is shown in the editor. </summary>
+    protected override string Message
+    {
+        get
         {
-            ExceptionDocumentation = exceptionDocumentation;
-        }
-
-        /// <summary>Gets the exception documentation. </summary>
-        internal ExceptionDocCommentModel ExceptionDocumentation { get; private set; }
-
-        /// <summary>Gets the message which is shown in the editor. </summary>
-        protected override string Message
-        {
-            get
-            {
-                return Constants.OptionalPrefix + String.Format(
-                    AnalyzerResources.HighlightNotThrownDocumentedExceptions, ExceptionDocumentation.ExceptionType.GetClrName().FullName);
-            }
+            return Constants.OptionalPrefix + String.Format(
+                AnalyzerResources.HighlightNotThrownDocumentedExceptions, ExceptionDocumentation.ExceptionType.GetClrName().FullName);
         }
     }
 }

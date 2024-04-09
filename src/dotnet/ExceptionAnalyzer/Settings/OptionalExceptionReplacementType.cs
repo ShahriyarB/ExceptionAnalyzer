@@ -1,10 +1,9 @@
-﻿namespace ReSharper.Exceptional.Settings
+﻿namespace ReSharper.Exceptional.Settings;
+
+public enum OptionalExceptionReplacementType
 {
-    public enum OptionalExceptionReplacementType
-    {
-        None, 
-        Always, 
-        InvocationOnly, 
-        ThrowOnly
-    }
+    None, 
+    Always, 
+    InvocationOnly, 
+    ThrowOnly
 }

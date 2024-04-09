@@ -1,12 +1,12 @@
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using ReSharper.Exceptional.Models;
 
-namespace ReSharper.Exceptional.Contexts
+namespace ReSharper.Exceptional.Contexts;
+
+internal class EventProcessContext : ProcessContext<EventDeclarationModel>
 {
-    internal class EventProcessContext : ProcessContext<EventDeclarationModel>
+    public override void EnterAccessor(IAccessorDeclaration accessorDeclarationNode)
     {
-        public override void EnterAccessor(IAccessorDeclaration accessorDeclarationNode)
-        {
             if (IsValid() == false)
                 return;
 
@@ -19,9 +19,8 @@ namespace ReSharper.Exceptional.Contexts
             BlockModelsStack.Push(accessor);
         }
 
-        public override void LeaveAccessor()
-        {
+    public override void LeaveAccessor()
+    {
             BlockModelsStack.Pop();
         }
-    }
 }

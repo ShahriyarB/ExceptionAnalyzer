@@ -3,28 +3,27 @@ using JetBrains.ReSharper.Psi.Tree;
 
 using ReSharper.Exceptional.Models;
 
-namespace ReSharper.Exceptional.Contexts
+namespace ReSharper.Exceptional.Contexts;
+
+internal interface IProcessContext
 {
-    internal interface IProcessContext
-    {
-        IAnalyzeUnit Model { get; }
+    IAnalyzeUnit Model { get; }
 
-        void StartProcess(IAnalyzeUnit analyzeUnit);
-        void RunAnalyzers();
+    void StartProcess(IAnalyzeUnit analyzeUnit);
+    void RunAnalyzers();
 
-        void EnterTryBlock(ITryStatement tryStatement);
-        void LeaveTryBlock();
+    void EnterTryBlock(ITryStatement tryStatement);
+    void LeaveTryBlock();
 
-        void EnterCatchClause(ICatchClause catchClauseNode);
-        void LeaveCatchClause();
+    void EnterCatchClause(ICatchClause catchClauseNode);
+    void LeaveCatchClause();
 
-        void Process(IThrowStatement throwStatement);
-        void Process(ICatchVariableDeclaration catchVariableDeclaration);
-        void Process(IReferenceExpression invocationExpression);
-        void Process(IObjectCreationExpression objectCreationExpression);
-        void Process(IDocCommentBlock docCommentBlockNode);
-        void Process(IThrowExpression throwExpression);
-        void EnterAccessor(IAccessorDeclaration accessorDeclarationNode);
-        void LeaveAccessor();
-    }
+    void Process(IThrowStatement throwStatement);
+    void Process(ICatchVariableDeclaration catchVariableDeclaration);
+    void Process(IReferenceExpression invocationExpression);
+    void Process(IObjectCreationExpression objectCreationExpression);
+    void Process(IDocCommentBlock docCommentBlockNode);
+    void Process(IThrowExpression throwExpression);
+    void EnterAccessor(IAccessorDeclaration accessorDeclarationNode);
+    void LeaveAccessor();
 }

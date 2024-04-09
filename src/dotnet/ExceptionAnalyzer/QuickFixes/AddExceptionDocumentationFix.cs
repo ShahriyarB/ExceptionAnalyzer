@@ -12,67 +12,66 @@ using JetBrains.ReSharper.Feature.Services.LiveTemplates.Templates;
 using JetBrains.ReSharper.Feature.Services.QuickFixes;
 using JetBrains.ReSharper.Resources.Shell;
 
-namespace ReSharper.Exceptional.QuickFixes
+namespace ReSharper.Exceptional.QuickFixes;
+
+//[QuickFix(null, BeforeOrAfter.Before)]
+[QuickFix()]
+internal class AddExceptionDocumentationFix : SingleActionFix
 {
-    //[QuickFix(null, BeforeOrAfter.Before)]
-    [QuickFix()]
-    internal class AddExceptionDocumentationFix : SingleActionFix
+    private ExceptionNotDocumentedOptionalHighlighting Error { get; set; }
+
+    public AddExceptionDocumentationFix(ExceptionNotDocumentedOptionalHighlighting error)
     {
-        private ExceptionNotDocumentedOptionalHighlighting Error { get; set; }
+        Error = error;
+    }
 
-        public AddExceptionDocumentationFix(ExceptionNotDocumentedOptionalHighlighting error)
+    public override string Text
+    {
+        get
         {
-            Error = error;
+            return String.Format(AnalyzerResources.QuickFixInsertExceptionDocumentation,
+                Error.ThrownException.ExceptionType.GetClrName().FullName);
         }
+    }
 
-        public override string Text
+    protected override Action<ITextControl> ExecutePsiTransaction(ISolution solution, IProgressIndicator progress)
+    {
+        var methodDeclaration = Error.ThrownException.AnalyzeUnit;
+        var insertedExceptionModel = methodDeclaration.DocumentationBlock.AddExceptionDocumentation(Error.ThrownException, progress);
+
+        if (insertedExceptionModel == null)
+            return null;
+
+        return MarkInsertedDescription(solution, insertedExceptionModel);
+    }
+
+    private Action<ITextControl> MarkInsertedDescription(ISolution solution, ExceptionDocCommentModel insertedExceptionModel)
+    {
+        var exceptionCommentRange = insertedExceptionModel.GetMarkerRange();
+        if (exceptionCommentRange == DocumentRange.InvalidRange)
+            return null;
+
+        var copyExceptionDescription =
+            string.IsNullOrEmpty(insertedExceptionModel.ExceptionDescription) ||
+            insertedExceptionModel.ExceptionDescription.Contains("[MARKER]");
+
+        var exceptionDescription = copyExceptionDescription ? "Condition" : insertedExceptionModel.ExceptionDescription.Trim();
+
+        var nameSuggestionsExpression = new NameSuggestionsExpression(new[] {exceptionDescription});
+        var field = new TemplateField("name", nameSuggestionsExpression, 0);
+        var fieldInfo = new HotspotInfo(field, exceptionCommentRange);
+
+        return textControl =>
         {
-            get
-            {
-                return String.Format(AnalyzerResources.QuickFixInsertExceptionDocumentation,
-                    Error.ThrownException.ExceptionType.GetClrName().FullName);
-            }
-        }
+            var hotspotSession = Shell.Instance.GetComponent<LiveTemplatesManager>()
+                .CreateHotspotSessionAtopExistingText(
+                    solution,
+                    DocumentRange.InvalidRange,
+                    textControl,
+                    LiveTemplatesManager.EscapeAction.LeaveTextAndCaret,
+                    fieldInfo);
 
-        protected override Action<ITextControl> ExecutePsiTransaction(ISolution solution, IProgressIndicator progress)
-        {
-            var methodDeclaration = Error.ThrownException.AnalyzeUnit;
-            var insertedExceptionModel = methodDeclaration.DocumentationBlock.AddExceptionDocumentation(Error.ThrownException, progress);
-
-            if (insertedExceptionModel == null)
-                return null;
-
-            return MarkInsertedDescription(solution, insertedExceptionModel);
-        }
-
-        private Action<ITextControl> MarkInsertedDescription(ISolution solution, ExceptionDocCommentModel insertedExceptionModel)
-        {
-            var exceptionCommentRange = insertedExceptionModel.GetMarkerRange();
-            if (exceptionCommentRange == DocumentRange.InvalidRange)
-                return null;
-
-            var copyExceptionDescription =
-                string.IsNullOrEmpty(insertedExceptionModel.ExceptionDescription) ||
-                insertedExceptionModel.ExceptionDescription.Contains("[MARKER]");
-
-            var exceptionDescription = copyExceptionDescription ? "Condition" : insertedExceptionModel.ExceptionDescription.Trim();
-
-            var nameSuggestionsExpression = new NameSuggestionsExpression(new[] {exceptionDescription});
-            var field = new TemplateField("name", nameSuggestionsExpression, 0);
-            var fieldInfo = new HotspotInfo(field, exceptionCommentRange);
-
-            return textControl =>
-            {
-                var hotspotSession = Shell.Instance.GetComponent<LiveTemplatesManager>()
-                    .CreateHotspotSessionAtopExistingText(
-                        solution,
-                        DocumentRange.InvalidRange,
-                        textControl,
-                        LiveTemplatesManager.EscapeAction.LeaveTextAndCaret,
-                        fieldInfo);
-
-                hotspotSession.Execute();
-            };
-        }
+            hotspotSession.Execute();
+        };
     }
 }

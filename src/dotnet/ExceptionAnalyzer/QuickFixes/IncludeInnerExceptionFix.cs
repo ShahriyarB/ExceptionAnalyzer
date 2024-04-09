@@ -8,81 +8,80 @@ using ReSharper.Exceptional.Highlightings;
 using ReSharper.Exceptional.Utilities;
 using JetBrains.ReSharper.Feature.Services.QuickFixes;
 
-namespace ReSharper.Exceptional.QuickFixes
+namespace ReSharper.Exceptional.QuickFixes;
+
+[QuickFix]
+internal class IncludeInnerExceptionFix : SingleActionFix
 {
-    [QuickFix]
-    internal class IncludeInnerExceptionFix : SingleActionFix
+    private ThrowFromCatchWithNoInnerExceptionHighlighting Error { get; set; }
+
+    public IncludeInnerExceptionFix(ThrowFromCatchWithNoInnerExceptionHighlighting error)
     {
-        private ThrowFromCatchWithNoInnerExceptionHighlighting Error { get; set; }
+        Error = error;
+    }
 
-        public IncludeInnerExceptionFix(ThrowFromCatchWithNoInnerExceptionHighlighting error)
+    public override string Text
+    {
+        get { return AnalyzerResources.QuickFixIncludeInnerException; }
+    }
+
+    protected override Action<ITextControl> ExecutePsiTransaction(ISolution solution, IProgressIndicator progress)
+    {
+        if (Error.ThrowStatement != null)
         {
-            Error = error;
+            return this.ExecutePsiTransactionForStatement();
         }
 
-        public override string Text
+        return this.ExecutePsiTransactionForExpression();
+    }
+
+    private Action<ITextControl> ExecutePsiTransactionForStatement()
+    {
+        var throwStatementModel = Error.ThrowStatement;
+        var outerCatchClause = throwStatementModel.FindOuterCatchClause();
+
+        string variableName;
+        if (outerCatchClause.Node is ISpecificCatchClause)
+            variableName = ((ISpecificCatchClause)outerCatchClause.Node).ExceptionDeclaration.DeclaredName;
+        else
+            variableName = NameFactory.CatchVariableName(outerCatchClause.Node, outerCatchClause.CaughtException);
+
+        if (outerCatchClause.Node is ISpecificCatchClause)
         {
-            get { return AnalyzerResources.QuickFixIncludeInnerException; }
+            outerCatchClause.AddCatchVariable(variableName);
+            throwStatementModel.AddInnerException(variableName);
+        }
+        else
+        {
+            throwStatementModel.AddInnerException(variableName);
+            outerCatchClause.AddCatchVariable(variableName);
         }
 
-        protected override Action<ITextControl> ExecutePsiTransaction(ISolution solution, IProgressIndicator progress)
-        {
-            if (Error.ThrowStatement != null)
-            {
-                return this.ExecutePsiTransactionForStatement();
-            }
+        return null;
+    }
 
-            return this.ExecutePsiTransactionForExpression();
+    private Action<ITextControl> ExecutePsiTransactionForExpression()
+    {
+        var throwExpressionModel = Error.ThrowExpression;
+        var outerCatchClause = throwExpressionModel.FindOuterCatchClause();
+
+        string variableName;
+        if (outerCatchClause.Node is ISpecificCatchClause)
+            variableName = ((ISpecificCatchClause)outerCatchClause.Node).ExceptionDeclaration.DeclaredName;
+        else
+            variableName = NameFactory.CatchVariableName(outerCatchClause.Node, outerCatchClause.CaughtException);
+
+        if (outerCatchClause.Node is ISpecificCatchClause)
+        {
+            outerCatchClause.AddCatchVariable(variableName);
+            throwExpressionModel.AddInnerException(variableName);
+        }
+        else
+        {
+            throwExpressionModel.AddInnerException(variableName);
+            outerCatchClause.AddCatchVariable(variableName);
         }
 
-        private Action<ITextControl> ExecutePsiTransactionForStatement()
-        {
-            var throwStatementModel = Error.ThrowStatement;
-            var outerCatchClause = throwStatementModel.FindOuterCatchClause();
-
-            string variableName;
-            if (outerCatchClause.Node is ISpecificCatchClause)
-                variableName = ((ISpecificCatchClause)outerCatchClause.Node).ExceptionDeclaration.DeclaredName;
-            else
-                variableName = NameFactory.CatchVariableName(outerCatchClause.Node, outerCatchClause.CaughtException);
-
-            if (outerCatchClause.Node is ISpecificCatchClause)
-            {
-                outerCatchClause.AddCatchVariable(variableName);
-                throwStatementModel.AddInnerException(variableName);
-            }
-            else
-            {
-                throwStatementModel.AddInnerException(variableName);
-                outerCatchClause.AddCatchVariable(variableName);
-            }
-
-            return null;
-        }
-
-        private Action<ITextControl> ExecutePsiTransactionForExpression()
-        {
-            var throwExpressionModel = Error.ThrowExpression;
-            var outerCatchClause = throwExpressionModel.FindOuterCatchClause();
-
-            string variableName;
-            if (outerCatchClause.Node is ISpecificCatchClause)
-                variableName = ((ISpecificCatchClause)outerCatchClause.Node).ExceptionDeclaration.DeclaredName;
-            else
-                variableName = NameFactory.CatchVariableName(outerCatchClause.Node, outerCatchClause.CaughtException);
-
-            if (outerCatchClause.Node is ISpecificCatchClause)
-            {
-                outerCatchClause.AddCatchVariable(variableName);
-                throwExpressionModel.AddInnerException(variableName);
-            }
-            else
-            {
-                throwExpressionModel.AddInnerException(variableName);
-                outerCatchClause.AddCatchVariable(variableName);
-            }
-
-            return null;
-        }
+        return null;
     }
 }

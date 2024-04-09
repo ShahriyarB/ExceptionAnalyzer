@@ -11,51 +11,51 @@ using ICatchVariableDeclaration = JetBrains.ReSharper.Psi.CSharp.Tree.ICatchVari
 using IThrowStatement = JetBrains.ReSharper.Psi.CSharp.Tree.IThrowStatement;
 using ITryStatement = JetBrains.ReSharper.Psi.CSharp.Tree.ITryStatement;
 
-namespace ReSharper.Exceptional.Models
-{
-    using System.Linq;
+namespace ReSharper.Exceptional.Models;
 
-    internal class CatchClauseModel : BlockModelBase<ICatchClause>
+using System.Linq;
+
+internal class CatchClauseModel : BlockModelBase<ICatchClause>
+{
+    public CatchClauseModel(ICatchClause catchClauseNode, TryStatementModel tryStatementModel, IAnalyzeUnit analyzeUnit)
+        : base(analyzeUnit, catchClauseNode)
     {
-        public CatchClauseModel(ICatchClause catchClauseNode, TryStatementModel tryStatementModel, IAnalyzeUnit analyzeUnit)
-            : base(analyzeUnit, catchClauseNode)
-        {
             ParentBlock = tryStatementModel;
             IsCatchAll = GetIsCatchAll();
         }
 
-        /// <summary>Gets a value indicating whether this is a catch clause which catches System.Exception. </summary>
-        public bool IsCatchAll { get; private set; }
+    /// <summary>Gets a value indicating whether this is a catch clause which catches System.Exception. </summary>
+    public bool IsCatchAll { get; private set; }
 
-        public bool IsExceptionTypeSpecified
-        {
-            get { return Node is ISpecificCatchClause; }
-        }
+    public bool IsExceptionTypeSpecified
+    {
+        get { return Node is ISpecificCatchClause; }
+    }
 
-        public CatchVariableModel Variable { get; set; }
+    public CatchVariableModel Variable { get; set; }
 
-        public bool HasVariable
-        {
-            get { return Variable != null; }
-        }
+    public bool HasVariable
+    {
+        get { return Variable != null; }
+    }
 
-        public override DocumentRange DocumentRange
-        {
-            get { return Node.CatchKeyword.GetDocumentRange(); }
-        }
+    public override DocumentRange DocumentRange
+    {
+        get { return Node.CatchKeyword.GetDocumentRange(); }
+    }
 
-        public IDeclaredType CaughtException
-        {
-            get { return Node.ExceptionType; }
-        }
+    public IDeclaredType CaughtException
+    {
+        get { return Node.ExceptionType; }
+    }
 
-        public override IBlock Content
-        {
-            get { return Node.Body; }
-        }
+    public override IBlock Content
+    {
+        get { return Node.Body; }
+    }
 
-        public bool Catches(IDeclaredType exception)
-        {
+    public bool Catches(IDeclaredType exception)
+    {
             if (exception == null)
                 return false;
 
@@ -65,24 +65,24 @@ namespace ReSharper.Exceptional.Models
             return exception.IsSubtypeOf(Node.ExceptionType);
         }
 
-        /// <summary>Analyzes the object and its children. </summary>
-        /// <param name="analyzer">The analyzer. </param>
-        public override void Accept(AnalyzerBase analyzer)
-        {
+    /// <summary>Analyzes the object and its children. </summary>
+    /// <param name="analyzer">The analyzer. </param>
+    public override void Accept(AnalyzerBase analyzer)
+    {
             analyzer.Visit(this);
             base.Accept(analyzer);
         }
 
-        /// <summary>Checks whether the block catches the given exception. </summary>
-        /// <param name="exception">The exception. </param>
-        /// <returns><c>true</c> if the exception is caught in the block; otherwise, <c>false</c>. </returns>
-        public override bool CatchesException(IDeclaredType exception)
-        {
+    /// <summary>Checks whether the block catches the given exception. </summary>
+    /// <param name="exception">The exception. </param>
+    /// <returns><c>true</c> if the exception is caught in the block; otherwise, <c>false</c>. </returns>
+    public override bool CatchesException(IDeclaredType exception)
+    {
             return ParentBlock.ParentBlock.CatchesException(exception); // Warning: ParentBlock of CatchClause is TryStatement and not the method!
         }
 
-        public void AddCatchVariable(string variableName)
-        {
+    public void AddCatchVariable(string variableName)
+    {
             if (Node is IGeneralCatchClause)
             {
                 if (HasVariable)
@@ -127,8 +127,8 @@ namespace ReSharper.Exceptional.Models
             }
         }
 
-        private bool GetIsCatchAll()
-        {
+    private bool GetIsCatchAll()
+    {
             if (Node.ExceptionType == null)
                 return false;
 
@@ -139,11 +139,10 @@ namespace ReSharper.Exceptional.Models
             return isSystemException && !hasConditionalClause && !rethrows;
         }
 
-        private bool ContainsRethrowStatement(IBlock body)
-        {
+    private bool ContainsRethrowStatement(IBlock body)
+    {
             var statements = body.Statements;
 
             return Enumerable.OfType<IThrowStatement>(statements).Any();
         }
-    }
 }
