@@ -16,6 +16,11 @@ namespace ReSharper.Exceptional
     {
     }
 
+    [ZoneDefinition]
+    public interface IExceptionAnalyzerZone : IZone, IRequire<ILanguageCSharpZone>
+    {
+    }
+
     internal static class ServiceLocator
     {
         public static IDaemonProcess Process { get; set; }
