@@ -1,6 +1,4 @@
-﻿using System.Security.RightsManagement;
-
-namespace ReSharper.Exceptional.Options
+﻿namespace ReSharper.Exceptional.Options
 {
     public static class OptionsLabels
     {

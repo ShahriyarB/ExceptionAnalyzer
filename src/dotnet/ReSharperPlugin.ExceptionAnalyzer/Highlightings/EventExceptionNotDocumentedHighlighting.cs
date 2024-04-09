@@ -1,19 +1,15 @@
 using JetBrains.ReSharper.Psi.CSharp;
-using ReSharper.Exceptional;
-using ReSharper.Exceptional.Highlightings;
 using ReSharper.Exceptional.Models;
 
 using JetBrains.ReSharper.Feature.Services.Daemon;
 
-[assembly: RegisterConfigurableSeverity(EventExceptionNotDocumentedHighlighting.Id, Constants.CompoundName, HighlightingGroupIds.BestPractice,
-    "Exceptional.EventExceptionNotDocumented",
-    "Exceptional.EventExceptionNotDocumented",
-    Severity.SUGGESTION
-    )]
-
-
 namespace ReSharper.Exceptional.Highlightings
 {
+    [RegisterConfigurableSeverity(Id, Constants.CompoundName, HighlightingGroupIds.BestPractice,
+        "Exceptional.EventExceptionNotDocumented",
+        "Exceptional.EventExceptionNotDocumented",
+        Severity.WARNING
+    )]
     [ConfigurableSeverityHighlighting(Id, CSharpLanguage.Name)]
     public class EventExceptionNotDocumentedHighlighting : ExceptionNotDocumentedHighlighting
     {
