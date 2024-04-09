@@ -171,3 +171,13 @@ c
 3src/dotnet/ExceptionAnalyzer/AnalyzerResources.resx,d\f\df03c968c6e6b19a05c6440b869b8cfd2534a65c
 i
 9src/dotnet/ExceptionAnalyzer.Tests/test/data/nuget.config,d\7\d72078fd82c407fbb16f85b912c1625cd08bb4f2
+l
+<src/dotnet/ExceptionAnalyzer/ExceptionAnalyzerDaemonStage.cs,8\7\872b2c5362e9d6d697823b3a9f95cbe844434dd7
+z
+Jsrc/dotnet/ExceptionAnalyzer/ExceptionAnalyzerRecursiveElementProcessor.cs,f\f\ff17083e53afc6082964f72bd48b9312762b8d3a
+r
+Bsrc/dotnet/ExceptionAnalyzer/Settings/ExceptionAnalyzerSettings.cs,8\e\8e101aba09e24a52025c35b4e2870e640657c5ad
+t
+Dsrc/dotnet/ExceptionAnalyzer/Options/ExceptionAnalyzerOptionsPage.cs,f\8\f8ff1f87b45579182460f1b13e1122c723564a1c
+s
+Csrc/dotnet/ExceptionAnalyzer/ExceptionAnalyzerDaemonStageProcess.cs,9\7\972ca70cf97d78c7066f0699e96a9417c56f7ee1

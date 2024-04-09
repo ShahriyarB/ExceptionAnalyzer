@@ -1,5 +1,4 @@
 using System;
-using ExceptionAnalyzer;
 using JetBrains.Application.Progress;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Psi.CSharp.Tree;

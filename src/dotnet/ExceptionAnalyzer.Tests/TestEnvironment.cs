@@ -6,7 +6,6 @@ using JetBrains.ReSharper.TestFramework;
 using JetBrains.TestFramework;
 using JetBrains.TestFramework.Application.Zones;
 using NUnit.Framework;
-using ExceptionAnalyzer;
 [assembly: Apartment(ApartmentState.STA)]
 
 namespace ExceptionAnalyzer.Tests;

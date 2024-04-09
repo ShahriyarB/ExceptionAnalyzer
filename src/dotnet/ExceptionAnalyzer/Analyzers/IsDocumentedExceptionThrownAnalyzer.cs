@@ -1,5 +1,4 @@
 using System.Linq;
-using ExceptionAnalyzer;
 using ExceptionAnalyzer.Highlightings;
 using ExceptionAnalyzer.Models;
 

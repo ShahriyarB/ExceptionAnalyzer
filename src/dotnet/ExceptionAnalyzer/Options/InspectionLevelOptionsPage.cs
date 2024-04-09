@@ -4,15 +4,14 @@ using JetBrains.Application.UI.Options.OptionsDialog;
 using JetBrains.DataFlow;
 using JetBrains.IDE.UI.Options;
 using JetBrains.Lifetimes;
-using ExceptionAnalyzer;
 using ExceptionAnalyzer.Settings;
 
 namespace ExceptionAnalyzer.Options;
 
-[OptionsPage(Pid, Name, typeof(UnnamedThemedIcons.ExceptionalSettings), ParentId = ExceptionalOptionsPage.Pid, Sequence = 1.0)]
+[OptionsPage(Pid, Name, typeof(UnnamedThemedIcons.ExceptionAnalyzerSettings), ParentId = ExceptionAnalyzerOptionsPage.Pid, Sequence = 1.0)]
 public class InspectionLevelOptionsPage : BeSimpleOptionsPage
 {
-    public const string Pid = "Exceptional::InspectionLevel";
+    public const string Pid = "ExceptionAnalyzer::InspectionLevel";
     public const string Name = "Inspection Level";
 
     public InspectionLevelOptionsPage(Lifetime lifetime, OptionsPageContext optionsPageContext, OptionsSettingsSmartContext optionsSettingsSmartContext, bool wrapInScrollablePanel = false) : base(lifetime, optionsPageContext, optionsSettingsSmartContext, wrapInScrollablePanel)
@@ -25,62 +24,62 @@ public class InspectionLevelOptionsPage : BeSimpleOptionsPage
 
     private void CreateCheckboxInspectPublic(Lifetime lifetime, IContextBoundSettingsStoreLive storeOptionsTransactionContext)
     {
-            IProperty<bool> property = new Property<bool>(lifetime, "Exceptional::InspectionLevel::InspectPublicMethodsAndProperties");
-            property.SetValue(storeOptionsTransactionContext.GetValue((ExceptionalSettings key) => key.InspectPublicMethods));
+            IProperty<bool> property = new Property<bool>(lifetime, "ExceptionAnalyzer::InspectionLevel::InspectPublicMethodsAndProperties");
+            property.SetValue(storeOptionsTransactionContext.GetValue((ExceptionAnalyzerSettings key) => key.InspectPublicMethods));
 
             property.Change.Advise(lifetime, a =>
             {
                 if (!a.HasNew) return;
                 
-                storeOptionsTransactionContext.SetValue((ExceptionalSettings key) => key.InspectPublicMethods, a.New);
+                storeOptionsTransactionContext.SetValue((ExceptionAnalyzerSettings key) => key.InspectPublicMethods, a.New);
             });
 
-            AddBoolOption((ExceptionalSettings key) => key.InspectPublicMethods, OptionsLabels.InspectionLevel.InspectPublicMethodsAndProperties);
+            AddBoolOption((ExceptionAnalyzerSettings key) => key.InspectPublicMethods, OptionsLabels.InspectionLevel.InspectPublicMethodsAndProperties);
         }
 
     private void CreateCheckboxInspectInternal(Lifetime lifetime, IContextBoundSettingsStoreLive storeOptionsTransactionContext)
     {
-            IProperty<bool> property = new Property<bool>(lifetime, "Exceptional::InspectionLevel::InspectInternalMethodsAndProperties");
-            property.SetValue(storeOptionsTransactionContext.GetValue((ExceptionalSettings key) => key.InspectInternalMethods));
+            IProperty<bool> property = new Property<bool>(lifetime, "ExceptionAnalyzer::InspectionLevel::InspectInternalMethodsAndProperties");
+            property.SetValue(storeOptionsTransactionContext.GetValue((ExceptionAnalyzerSettings key) => key.InspectInternalMethods));
 
             property.Change.Advise(lifetime, a =>
             {
                 if (!a.HasNew) return;
 
-                storeOptionsTransactionContext.SetValue((ExceptionalSettings key) => key.InspectInternalMethods, a.New);
+                storeOptionsTransactionContext.SetValue((ExceptionAnalyzerSettings key) => key.InspectInternalMethods, a.New);
             });
 
-            AddBoolOption((ExceptionalSettings key) => key.InspectInternalMethods, OptionsLabels.InspectionLevel.InspectInternalMethodsAndProperties);
+            AddBoolOption((ExceptionAnalyzerSettings key) => key.InspectInternalMethods, OptionsLabels.InspectionLevel.InspectInternalMethodsAndProperties);
         }
 
     private void CreateCheckboxInspectProtected(Lifetime lifetime, IContextBoundSettingsStoreLive storeOptionsTransactionContext)
     {
-            IProperty<bool> property = new Property<bool>(lifetime, "Exceptional::InspectionLevel::InspectProtectedMethodsAndProperties");
+            IProperty<bool> property = new Property<bool>(lifetime, "ExceptionAnalyzer::InspectionLevel::InspectProtectedMethodsAndProperties");
             property.SetValue(storeOptionsTransactionContext.GetValue(
-                (ExceptionalSettings key) => key.InspectProtectedMethods));
+                (ExceptionAnalyzerSettings key) => key.InspectProtectedMethods));
 
             property.Change.Advise(lifetime, a =>
             {
                 if (!a.HasNew) return;
 
-                storeOptionsTransactionContext.SetValue((ExceptionalSettings key) => key.InspectProtectedMethods, a.New);
+                storeOptionsTransactionContext.SetValue((ExceptionAnalyzerSettings key) => key.InspectProtectedMethods, a.New);
             });
 
-            AddBoolOption((ExceptionalSettings key) => key.InspectProtectedMethods, OptionsLabels.InspectionLevel.InspectProtectedMethodsAndProperties);
+            AddBoolOption((ExceptionAnalyzerSettings key) => key.InspectProtectedMethods, OptionsLabels.InspectionLevel.InspectProtectedMethodsAndProperties);
         }
 
     private void CreateCheckboxInspectPrivate(Lifetime lifetime, IContextBoundSettingsStoreLive storeOptionsTransactionContext)
     {
-            IProperty<bool> property = new Property<bool>(lifetime, "Exceptional::InspectionLevel::InspectPrivateMethodsAndProperties");
-            property.SetValue(storeOptionsTransactionContext.GetValue((ExceptionalSettings key) => key.InspectPrivateMethods));
+            IProperty<bool> property = new Property<bool>(lifetime, "ExceptionAnalyzer::InspectionLevel::InspectPrivateMethodsAndProperties");
+            property.SetValue(storeOptionsTransactionContext.GetValue((ExceptionAnalyzerSettings key) => key.InspectPrivateMethods));
 
             property.Change.Advise(lifetime, a =>
             {
                 if (!a.HasNew) return;
 
-                storeOptionsTransactionContext.SetValue((ExceptionalSettings key) => key.InspectPrivateMethods, a.New);
+                storeOptionsTransactionContext.SetValue((ExceptionAnalyzerSettings key) => key.InspectPrivateMethods, a.New);
             });
 
-            AddBoolOption((ExceptionalSettings key) => key.InspectPrivateMethods, OptionsLabels.InspectionLevel.InspectPrivateMethodsAndProperties);
+            AddBoolOption((ExceptionAnalyzerSettings key) => key.InspectPrivateMethods, OptionsLabels.InspectionLevel.InspectPrivateMethodsAndProperties);
         }
 }

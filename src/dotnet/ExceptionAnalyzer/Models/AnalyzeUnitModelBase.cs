@@ -2,7 +2,6 @@ using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.Modules;
 using JetBrains.ReSharper.Psi.Tree;
 using ExceptionAnalyzer.Analyzers;
-using ExceptionAnalyzer;
 
 namespace ExceptionAnalyzer.Models;
 

@@ -7,15 +7,14 @@ using JetBrains.IDE.UI.Options;
 using JetBrains.Lifetimes;
 using JetBrains.Rd.Base;
 using JetBrains.Util;
-using ExceptionAnalyzer;
 using ExceptionAnalyzer.Settings;
 
 namespace ExceptionAnalyzer.Options;
 
-[OptionsPage(Pid, Name, typeof(UnnamedThemedIcons.ExceptionalSettings), ParentId = ExceptionalOptionsPage.Pid, Sequence = 2.0)]
+[OptionsPage(Pid, Name, typeof(UnnamedThemedIcons.ExceptionAnalyzerSettings), ParentId = ExceptionAnalyzerOptionsPage.Pid, Sequence = 2.0)]
 public class ExceptionTypesAsHintOptionsPage : BeSimpleOptionsPage
 {
-    public const string Pid = "Exceptional::ExceptionTypesAsHint";
+    public const string Pid = "ExceptionAnalyzer::ExceptionTypesAsHint";
     public const string Name = "Optional Exceptions (Global)";
 
     public ExceptionTypesAsHintOptionsPage(Lifetime lifetime, OptionsPageContext optionsPageContext, OptionsSettingsSmartContext optionsSettingsSmartContext) : base(lifetime, optionsPageContext, optionsSettingsSmartContext, true)
@@ -34,36 +33,36 @@ public class ExceptionTypesAsHintOptionsPage : BeSimpleOptionsPage
 
     private void ShowPredefined()
     {
-            string content = Settings.ExceptionalSettings.DefaultOptionalExceptions;
+            string content = Settings.ExceptionAnalyzerSettings.DefaultOptionalExceptions;
 
             MessageBox.ShowInfo(content);
         }
 
     private void CreateCheckboxUsePredefined(Lifetime lifetime, IContextBoundSettingsStoreLive storeOptionsTransactionContext)
     {
-            IProperty<bool> property = new Property<bool>(lifetime, "Exceptional::ExceptionTypesAsHint::UsePredefined");
-            property.SetValue(storeOptionsTransactionContext.GetValue((ExceptionalSettings key) => key.UseDefaultOptionalExceptions2));
+            IProperty<bool> property = new Property<bool>(lifetime, "ExceptionAnalyzer::ExceptionTypesAsHint::UsePredefined");
+            property.SetValue(storeOptionsTransactionContext.GetValue((ExceptionAnalyzerSettings key) => key.UseDefaultOptionalExceptions2));
 
             property.Change.Advise(lifetime, a =>
             {
                 if (!a.HasNew) return;
                 
-                storeOptionsTransactionContext.SetValue((ExceptionalSettings key) => key.UseDefaultOptionalExceptions2, a.New);
+                storeOptionsTransactionContext.SetValue((ExceptionAnalyzerSettings key) => key.UseDefaultOptionalExceptions2, a.New);
             });
 
-            AddBoolOption((ExceptionalSettings key) => key.UseDefaultOptionalExceptions2, OptionsLabels.ExceptionTypesAsHint.UsePredefined);
+            AddBoolOption((ExceptionAnalyzerSettings key) => key.UseDefaultOptionalExceptions2, OptionsLabels.ExceptionTypesAsHint.UsePredefined);
         }
 
     private void CreateRichTextExceptionTypesAsHint(Lifetime lifetime, IContextBoundSettingsStoreLive storeOptionsTransactionContext)
     {
-            IProperty<string> property = new Property<string>(lifetime, "Exceptional::ExceptionTypesAsHint::ExceptionTypes");
-            property.SetValue(storeOptionsTransactionContext.GetValue((ExceptionalSettings key) => key.OptionalExceptions2));
+            IProperty<string> property = new Property<string>(lifetime, "ExceptionAnalyzer::ExceptionTypesAsHint::ExceptionTypes");
+            property.SetValue(storeOptionsTransactionContext.GetValue((ExceptionAnalyzerSettings key) => key.OptionalExceptions2));
 
             property.Change.Advise(lifetime, a =>
             {
                 if (!a.HasNew) return;
 
-                storeOptionsTransactionContext.SetValue((ExceptionalSettings key) => key.OptionalExceptions2, a.New);
+                storeOptionsTransactionContext.SetValue((ExceptionAnalyzerSettings key) => key.OptionalExceptions2, a.New);
             });
 
             var textControl = BeControls.GetTextControl(isReadonly:false);
@@ -71,7 +70,7 @@ public class ExceptionTypesAsHintOptionsPage : BeSimpleOptionsPage
             textControl.Text.SetValue(property.GetValue());
             textControl.Text.Change.Advise(lifetime, str =>
             {
-                storeOptionsTransactionContext.SetValue((ExceptionalSettings key) => key.OptionalExceptions2, str);
+                storeOptionsTransactionContext.SetValue((ExceptionAnalyzerSettings key) => key.OptionalExceptions2, str);
             });
 
             AddControl(textControl);

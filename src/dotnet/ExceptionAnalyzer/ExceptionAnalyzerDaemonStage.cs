@@ -24,8 +24,8 @@ public interface IExceptionAnalyzerZone : IZone, IRequire<ILanguageCSharpZone>
 internal static class ServiceLocator
 {
     public static IDaemonProcess Process { get; set; }
-    public static ExceptionalDaemonStageProcess StageProcess { get; set; }
-    public static ExceptionalSettings Settings { get; set; }
+    public static ExceptionAnalyzerDaemonStageProcess StageProcess { get; set; }
+    public static ExceptionAnalyzerSettings Settings { get; set; }
 }
 
 /// <summary>Daemon stage that is responsible for creating daemon stage process.</summary>
@@ -34,7 +34,7 @@ internal static class ServiceLocator
 /// marks this type so that it will be automatically loaded by ReSharper. To work properly the
 /// marked type must implement <see cref="IDaemonStage"/> interface.</remarks>
 [DaemonStage]
-public class ExceptionalDaemonStage : CSharpDaemonStageBase
+public class ExceptionAnalyzerDaemonStage : CSharpDaemonStageBase
 {
     protected override IDaemonStageProcess CreateProcess(
         IDaemonProcess process, IContextBoundSettingsStore settings,
@@ -43,12 +43,12 @@ public class ExceptionalDaemonStage : CSharpDaemonStageBase
             if (IsSupported(process.SourceFile) == false)
                 return null;
 
-            var exceptionalSettings = settings.GetKey<ExceptionalSettings>(SettingsOptimization.OptimizeDefault);
-            exceptionalSettings.InvalidateCaches();
+            var analyzerSettings = settings.GetKey<ExceptionAnalyzerSettings>(SettingsOptimization.OptimizeDefault);
+            analyzerSettings.InvalidateCaches();
 
             ServiceLocator.Process = process;
-            ServiceLocator.Settings = exceptionalSettings;
-            ServiceLocator.StageProcess = new ExceptionalDaemonStageProcess(file, process.SourceFile, settings);
+            ServiceLocator.Settings = analyzerSettings;
+            ServiceLocator.StageProcess = new ExceptionAnalyzerDaemonStageProcess(file, process.SourceFile, settings);
 
             return ServiceLocator.StageProcess;
         }

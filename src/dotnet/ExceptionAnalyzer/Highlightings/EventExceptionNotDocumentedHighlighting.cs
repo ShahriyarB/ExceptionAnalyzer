@@ -1,4 +1,3 @@
-using ExceptionAnalyzer;
 using JetBrains.ReSharper.Psi.CSharp;
 using ExceptionAnalyzer.Models;
 
@@ -7,8 +6,8 @@ using JetBrains.ReSharper.Feature.Services.Daemon;
 namespace ExceptionAnalyzer.Highlightings;
 
 [RegisterConfigurableSeverity(Id, Constants.CompoundName, HighlightingGroupIds.BestPractice,
-    "Exceptional.EventExceptionNotDocumented",
-    "Exceptional.EventExceptionNotDocumented",
+    "ExceptionAnalyzer.EventExceptionNotDocumented",
+    "ExceptionAnalyzer.EventExceptionNotDocumented",
     Severity.WARNING
 )]
 [ConfigurableSeverityHighlighting(Id, CSharpLanguage.Name)]

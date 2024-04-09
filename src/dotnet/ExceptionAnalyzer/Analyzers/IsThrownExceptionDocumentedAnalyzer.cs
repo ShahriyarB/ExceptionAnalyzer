@@ -1,7 +1,6 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using JetBrains.ReSharper.Psi;
-using ExceptionAnalyzer;
 using ExceptionAnalyzer.Highlightings;
 using ExceptionAnalyzer.Models;
 using ExceptionAnalyzer.Models.ExceptionsOrigins;

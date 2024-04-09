@@ -7,7 +7,6 @@ using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 using ExceptionAnalyzer.Analyzers;
 using ExceptionAnalyzer.Models.ExceptionsOrigins;
-using ExceptionAnalyzer;
 
 namespace ExceptionAnalyzer.Models;
 

@@ -20,6 +20,6 @@
 //    /// <summary>Popup menu item text. </summary>
 //    public override string Text
 //    {
-//        get { return "Add to list of excluded method exceptions. [Exceptional]"; } // TODO: Translate
+//        get { return "Add to list of excluded method exceptions"; } // TODO: Translate
 //    }
 //}

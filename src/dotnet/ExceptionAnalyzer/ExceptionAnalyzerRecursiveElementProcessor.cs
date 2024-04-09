@@ -8,14 +8,14 @@ using ExceptionAnalyzer.Models;
 
 namespace ExceptionAnalyzer;
 
-public class ExceptionalRecursiveElementProcessor : IRecursiveElementProcessor
+public class ExceptionAnalyzerRecursiveElementProcessor : IRecursiveElementProcessor
 {
     private readonly CSharpDaemonStageProcessBase _daemonProcess;
     private readonly List<IDocCommentBlock> _eventComments = new List<IDocCommentBlock>();
 
     private IProcessContext _currentContext;
 
-    public ExceptionalRecursiveElementProcessor(CSharpDaemonStageProcessBase daemonProcess)
+    public ExceptionAnalyzerRecursiveElementProcessor(CSharpDaemonStageProcessBase daemonProcess)
     {
         _daemonProcess = daemonProcess;
         _currentContext = new NullProcessContext();

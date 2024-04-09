@@ -1,4 +1,3 @@
-using ExceptionAnalyzer;
 using JetBrains.ReSharper.Psi.CSharp;
 using ExceptionAnalyzer.Models.ExceptionsOrigins;
 using JetBrains.ReSharper.Feature.Services.Daemon;
@@ -6,8 +5,8 @@ using JetBrains.ReSharper.Feature.Services.Daemon;
 namespace ExceptionAnalyzer.Highlightings;
 
 [RegisterConfigurableSeverity(Id, Constants.CompoundName, HighlightingGroupIds.BestPractice,
-    "Exceptional.ThrowFromCatchWithNoInnerException",
-    "Exceptional.ThrowFromCatchWithNoInnerException",
+    "ExceptionAnalyzer.ThrowFromCatchWithNoInnerException",
+    "ExceptionAnalyzer.ThrowFromCatchWithNoInnerException",
     Severity.WARNING
 )]
 [ConfigurableSeverityHighlighting(Id, CSharpLanguage.Name)]

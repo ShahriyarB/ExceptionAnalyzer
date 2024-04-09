@@ -7,15 +7,14 @@ using JetBrains.IDE.UI.Options;
 using JetBrains.Lifetimes;
 using JetBrains.Rd.Base;
 using JetBrains.Util;
-using ExceptionAnalyzer;
 using ExceptionAnalyzer.Settings;
 
 namespace ExceptionAnalyzer.Options;
 
-[OptionsPage(Pid, Name, typeof(UnnamedThemedIcons.ExceptionalSettings), ParentId = ExceptionalOptionsPage.Pid, Sequence = 4.0)]
+[OptionsPage(Pid, Name, typeof(UnnamedThemedIcons.ExceptionAnalyzerSettings), ParentId = ExceptionAnalyzerOptionsPage.Pid, Sequence = 4.0)]
 public class AccessorOverridesOptionsPage : BeSimpleOptionsPage
 {
-    public const string Pid = "Exceptional::AccessorOverrides";
+    public const string Pid = "ExceptionAnalyzer::AccessorOverrides";
     public const string Name = "Accessor Overrides";
 
     public AccessorOverridesOptionsPage(Lifetime lifetime, OptionsPageContext optionsPageContext, OptionsSettingsSmartContext optionsSettingsSmartContext, bool wrapInScrollablePanel = true) : base(lifetime, optionsPageContext, optionsSettingsSmartContext, wrapInScrollablePanel)
@@ -34,36 +33,36 @@ public class AccessorOverridesOptionsPage : BeSimpleOptionsPage
 
     private void ShowPredefined()
     {
-            string content = Settings.ExceptionalSettings.DefaultAccessorOverrides;
+            string content = Settings.ExceptionAnalyzerSettings.DefaultAccessorOverrides;
 
             MessageBox.ShowInfo(content);
         }
 
     private void CreateCheckboxUsePredefined(in Lifetime lifetime, IContextBoundSettingsStoreLive storeOptionsTransactionContext)
     {
-            IProperty<bool> property = new Property<bool>(lifetime, "Exceptional::AccessorOverrides::UsePredefined");
-            property.SetValue(storeOptionsTransactionContext.GetValue((ExceptionalSettings key) => key.UseDefaultAccessorOverrides2));
+            IProperty<bool> property = new Property<bool>(lifetime, "ExceptionAnalyzer::AccessorOverrides::UsePredefined");
+            property.SetValue(storeOptionsTransactionContext.GetValue((ExceptionAnalyzerSettings key) => key.UseDefaultAccessorOverrides2));
 
             property.Change.Advise(lifetime, a =>
             {
                 if (!a.HasNew) return;
 
-                storeOptionsTransactionContext.SetValue((ExceptionalSettings key) => key.UseDefaultAccessorOverrides2, a.New);
+                storeOptionsTransactionContext.SetValue((ExceptionAnalyzerSettings key) => key.UseDefaultAccessorOverrides2, a.New);
             });
 
-            AddBoolOption((ExceptionalSettings key) => key.UseDefaultAccessorOverrides2, OptionsLabels.AccessorOverrides.UsePredefined);
+            AddBoolOption((ExceptionAnalyzerSettings key) => key.UseDefaultAccessorOverrides2, OptionsLabels.AccessorOverrides.UsePredefined);
         }
 
     private void CreateRichTextAccessorOverrides(in Lifetime lifetime, IContextBoundSettingsStoreLive storeOptionsTransactionContext)
     {
-            IProperty<string> property = new Property<string>(lifetime, "Exceptional::AccessorOverrides::AccessorOverrides");
-            property.SetValue(storeOptionsTransactionContext.GetValue((ExceptionalSettings key) => key.AccessorOverrides2));
+            IProperty<string> property = new Property<string>(lifetime, "ExceptionAnalyzer::AccessorOverrides::AccessorOverrides");
+            property.SetValue(storeOptionsTransactionContext.GetValue((ExceptionAnalyzerSettings key) => key.AccessorOverrides2));
 
             property.Change.Advise(lifetime, a =>
             {
                 if (!a.HasNew) return;
 
-                storeOptionsTransactionContext.SetValue((ExceptionalSettings key) => key.AccessorOverrides2, a.New);
+                storeOptionsTransactionContext.SetValue((ExceptionAnalyzerSettings key) => key.AccessorOverrides2, a.New);
             });
 
             var textControl = BeControls.GetTextControl(isReadonly:false);
@@ -71,7 +70,7 @@ public class AccessorOverridesOptionsPage : BeSimpleOptionsPage
             textControl.Text.SetValue(property.GetValue());
             textControl.Text.Change.Advise(lifetime, str =>
             {
-                storeOptionsTransactionContext.SetValue((ExceptionalSettings key) => key.AccessorOverrides2, str);
+                storeOptionsTransactionContext.SetValue((ExceptionAnalyzerSettings key) => key.AccessorOverrides2, str);
             });
 
             AddControl(textControl);

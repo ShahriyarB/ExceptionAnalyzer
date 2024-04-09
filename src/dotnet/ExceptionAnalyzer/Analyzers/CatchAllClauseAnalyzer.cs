@@ -1,4 +1,3 @@
-using ExceptionAnalyzer;
 using ExceptionAnalyzer.Highlightings;
 using ExceptionAnalyzer.Models;
 

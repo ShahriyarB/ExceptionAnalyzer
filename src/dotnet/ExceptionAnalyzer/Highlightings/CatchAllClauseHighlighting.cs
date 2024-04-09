@@ -1,5 +1,4 @@
 using System;
-using ExceptionAnalyzer;
 using JetBrains.ReSharper.Psi.CSharp;
 
 using JetBrains.ReSharper.Feature.Services.Daemon;
@@ -7,8 +6,8 @@ using JetBrains.ReSharper.Feature.Services.Daemon;
 namespace ExceptionAnalyzer.Highlightings;
 
 [RegisterConfigurableSeverity(Id, Constants.CompoundName, HighlightingGroupIds.BestPractice,
-    "Exceptional.CatchAllClause",
-    "Exceptional.CatchAllClause",
+    "ExceptionAnalyzer.CatchAllClause",
+    "ExceptionAnalyzer.CatchAllClause",
     Severity.WARNING
 )]
 [ConfigurableSeverityHighlighting(Id, CSharpLanguage.Name)]

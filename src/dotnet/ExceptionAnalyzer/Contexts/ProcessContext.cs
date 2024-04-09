@@ -59,7 +59,7 @@ internal abstract class ProcessContext<T> : IProcessContext where T : IAnalyzeUn
         if (tryStatement == null)
             return;
 
-        Logger.Assert(BlockModelsStack.Count > 0, "[Exceptional] There is no block for try statement.");
+        Logger.Assert(BlockModelsStack.Count > 0);
 
         var model = new TryStatementModel(AnalyzeUnit, tryStatement);
 
@@ -86,13 +86,13 @@ internal abstract class ProcessContext<T> : IProcessContext where T : IAnalyzeUn
         if (catchClauseNode == null)
             return;
 
-        Logger.Assert(_tryStatementModelsStack.Count > 0, "[Exceptional] There is no try statement for catch declaration.");
+        Logger.Assert(_tryStatementModelsStack.Count > 0);
 
         var tryStatementModel = _tryStatementModelsStack.Peek();
         var model = tryStatementModel.CatchClauses
             .Find(catchClauseModel => catchClauseModel.Node.Equals(catchClauseNode));
 
-        Logger.Assert(model != null, "[Exceptional] Cannot find catch model!");
+        Logger.Assert(model != null);
 
         _catchClauseModelsStack.Push(model);
         BlockModelsStack.Push(model);
@@ -111,7 +111,7 @@ internal abstract class ProcessContext<T> : IProcessContext where T : IAnalyzeUn
         if (throwStatement == null)
             return;
 
-        Logger.Assert(BlockModelsStack.Count > 0, "[Exceptional] There is no block for throw statement.");
+        Logger.Assert(BlockModelsStack.Count > 0);
 
         var containingBlockModel = BlockModelsStack.Peek();
         containingBlockModel.ThrownExceptions.Add(
@@ -126,7 +126,7 @@ internal abstract class ProcessContext<T> : IProcessContext where T : IAnalyzeUn
         if (catchVariableDeclaration == null)
             return;
 
-        Logger.Assert(_catchClauseModelsStack.Count > 0, "[Exceptional] There is no catch clause for catch variable declaration.");
+        Logger.Assert(_catchClauseModelsStack.Count > 0);
 
         var catchClause = _catchClauseModelsStack.Peek();
         catchClause.Variable = new CatchVariableModel(AnalyzeUnit, catchVariableDeclaration);
@@ -140,7 +140,7 @@ internal abstract class ProcessContext<T> : IProcessContext where T : IAnalyzeUn
         if (invocationExpression == null)
             return;
 
-        Logger.Assert(BlockModelsStack.Count > 0, "[Exceptional] There is no block for invocation statement.");
+        Logger.Assert(BlockModelsStack.Count > 0);
 
         var containingBlockModel = BlockModelsStack.Peek();
         containingBlockModel.ThrownExceptions.Add(
@@ -155,7 +155,7 @@ internal abstract class ProcessContext<T> : IProcessContext where T : IAnalyzeUn
         if (objectCreationExpression == null)
             return;
 
-        Logger.Assert(BlockModelsStack.Count > 0, "[Exceptional] There is no block for invocation statement.");
+        Logger.Assert(BlockModelsStack.Count > 0);
 
         var containingBlockModel = BlockModelsStack.Peek();
         containingBlockModel.ThrownExceptions.Add(
@@ -182,7 +182,7 @@ internal abstract class ProcessContext<T> : IProcessContext where T : IAnalyzeUn
         if (throwExpression == null)
             return;
 
-        Logger.Assert(BlockModelsStack.Count > 0, "[Exceptional] There is no block for throw expression.");
+        Logger.Assert(BlockModelsStack.Count > 0);
 
         var containingBlockModel = BlockModelsStack.Peek();
         containingBlockModel.ThrownExceptions.Add(

@@ -10,7 +10,6 @@ using JetBrains.ReSharper.Psi.Resolve;
 using JetBrains.ReSharper.Psi.Tree;
 using ExceptionAnalyzer.Analyzers;
 using ExceptionAnalyzer.Models.ExceptionsOrigins;
-using ExceptionAnalyzer;
 
 namespace ExceptionAnalyzer.Models;
 

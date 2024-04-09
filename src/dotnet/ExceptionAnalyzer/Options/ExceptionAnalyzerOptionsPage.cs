@@ -4,8 +4,8 @@ using JetBrains.Application.UI.Options.OptionsDialog;
 namespace ExceptionAnalyzer.Options;
 
 [OptionsPage(Pid, Name, null, Sequence = 5.0)]
-public class ExceptionalOptionsPage : AEmptyOptionsPage
+public class ExceptionAnalyzerOptionsPage : AEmptyOptionsPage
 {
-    public const string Pid = "Exceptional";
-    public const string Name = "Exceptional";
+    public const string Pid = "ExceptionAnalyzer";
+    public const string Name = "ExceptionAnalyzer";
 }

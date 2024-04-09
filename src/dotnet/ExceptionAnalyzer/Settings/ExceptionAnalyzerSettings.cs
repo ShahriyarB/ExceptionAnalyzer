@@ -5,12 +5,11 @@ using JetBrains.Application.Settings;
 using JetBrains.Application.Settings.WellKnownRootKeys;
 using JetBrains.ReSharper.Psi;
 using JetBrains.Util.Logging;
-using ExceptionAnalyzer;
 
 namespace ExceptionAnalyzer.Settings;
 
-[SettingsKey(typeof(EnvironmentSettings), "Exceptional Settings")]
-public class ExceptionalSettings
+[SettingsKey(typeof(EnvironmentSettings), "Exception Analyzer Settings")]
+public class ExceptionAnalyzerSettings
 {
     [SettingsEntry(true, "Inspect public methods")]
     public bool InspectPublicMethods { get; set; }
@@ -93,7 +92,7 @@ System.Collections.Generic.Dictionary.Item,System.Collections.Generic.KeyNotFoun
 
     public void InvalidateCaches()
     {
-            lock (typeof(ExceptionalSettings))
+            lock (typeof(ExceptionAnalyzerSettings))
             {
                 _optionalExceptionsCache = null;
                 _optionalMethodExceptionsCache = null;
@@ -104,7 +103,7 @@ System.Collections.Generic.Dictionary.Item,System.Collections.Generic.KeyNotFoun
     {
             if (_optionalExceptionsCache == null)
             {
-                lock (typeof(ExceptionalSettings))
+                lock (typeof(ExceptionAnalyzerSettings))
                 {
                     if (_optionalExceptionsCache == null)
                         _optionalExceptionsCache = LoadOptionalExceptions();
@@ -117,7 +116,7 @@ System.Collections.Generic.Dictionary.Item,System.Collections.Generic.KeyNotFoun
     {
             if (_optionalMethodExceptionsCache == null)
             {
-                lock (typeof(ExceptionalSettings))
+                lock (typeof(ExceptionAnalyzerSettings))
                 {
                     if (_optionalMethodExceptionsCache == null)
                         _optionalMethodExceptionsCache = LoadOptionalMethodExceptions();
@@ -130,7 +129,7 @@ System.Collections.Generic.Dictionary.Item,System.Collections.Generic.KeyNotFoun
     {
             if (_exceptionAccessorOverridesCache == null)
             {
-                lock (typeof(ExceptionalSettings))
+                lock (typeof(ExceptionAnalyzerSettings))
                 {
                     if (_exceptionAccessorOverridesCache == null)
                         _exceptionAccessorOverridesCache = LoadExceptionAccessorOverrides();
@@ -194,7 +193,7 @@ System.Collections.Generic.Dictionary.Item,System.Collections.Generic.KeyNotFoun
             }
             catch (Exception ex)
             {
-                Logger.LogException(string.Format("[Exceptional] Error loading optional exception '{0}'", line), ex);
+                Logger.LogException(string.Format("Error loading optional exception '{0}'", line), ex);
             }
             return null;
         }

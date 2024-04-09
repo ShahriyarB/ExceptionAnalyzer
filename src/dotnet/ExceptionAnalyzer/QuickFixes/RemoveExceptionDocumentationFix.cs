@@ -4,7 +4,6 @@ using JetBrains.ProjectModel;
 using JetBrains.TextControl;
 using ExceptionAnalyzer.Highlightings;
 using JetBrains.ReSharper.Feature.Services.QuickFixes;
-using ExceptionAnalyzer.QuickFixes;
 
 namespace ExceptionAnalyzer.QuickFixes;
 

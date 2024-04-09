@@ -1,7 +1,6 @@
 using System;
 using JetBrains.ReSharper.Psi;
 using JetBrains.Util.Logging;
-using ExceptionAnalyzer;
 
 namespace ExceptionAnalyzer.Settings;
 
@@ -34,7 +33,7 @@ public class ExceptionAccessorOverride
         }
         catch (Exception ex)
         {
-            Logger.LogException(string.Format("[Exceptional] Error loading excluded method exception '{0}'", ExceptionType), ex);
+            Logger.LogException(string.Format("Error loading excluded method exception '{0}'", ExceptionType), ex);
         }
         finally
         {

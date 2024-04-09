@@ -14,11 +14,11 @@ namespace ExceptionAnalyzer;
 /// <summary>This process is executed by the ReSharper's Daemon</summary>
 /// <remarks>The instance of this class is constructed each time the daemon needs to re highlight a given file. 
 /// This object is short-lived. It executes the target highlighting logic.</remarks>
-public class ExceptionalDaemonStageProcess : CSharpDaemonStageProcessBase
+public class ExceptionAnalyzerDaemonStageProcess : CSharpDaemonStageProcessBase
 {
     private readonly IHighlightingConsumer _consumer;
 
-    public ExceptionalDaemonStageProcess(ICSharpFile file, IPsiSourceFile psiSourceFile, IContextBoundSettingsStore settings)
+    public ExceptionAnalyzerDaemonStageProcess(ICSharpFile file, IPsiSourceFile psiSourceFile, IContextBoundSettingsStore settings)
         : base(ServiceLocator.Process, file)
     {
             _consumer = new FilteringHighlightingConsumer(psiSourceFile, file, settings);
@@ -36,7 +36,7 @@ public class ExceptionalDaemonStageProcess : CSharpDaemonStageProcessBase
             if (file == null)
                 return;
 
-            var elementProcessor = new ExceptionalRecursiveElementProcessor(this);
+            var elementProcessor = new ExceptionAnalyzerRecursiveElementProcessor(this);
             file.ProcessDescendants(elementProcessor);
 
             if (ServiceLocator.Process.InterruptFlag)
