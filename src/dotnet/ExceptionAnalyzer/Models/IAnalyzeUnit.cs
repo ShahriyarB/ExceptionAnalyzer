@@ -1,8 +1,8 @@
 using JetBrains.ReSharper.Psi.Modules;
 using JetBrains.ReSharper.Psi.Tree;
-using ReSharper.Exceptional.Analyzers;
+using ExceptionAnalyzer.Analyzers;
 
-namespace ReSharper.Exceptional.Models;
+namespace ExceptionAnalyzer.Models;
 
 internal interface IAnalyzeUnit : IBlockModel
 {

@@ -1,9 +1,10 @@
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.Modules;
 using JetBrains.ReSharper.Psi.Tree;
-using ReSharper.Exceptional.Analyzers;
+using ExceptionAnalyzer.Analyzers;
+using ExceptionAnalyzer;
 
-namespace ReSharper.Exceptional.Models;
+namespace ExceptionAnalyzer.Models;
 
 internal abstract class AnalyzeUnitModelBase<T> : BlockModelBase<T>, IAnalyzeUnit where T : ITreeNode
 {

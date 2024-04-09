@@ -9,7 +9,7 @@ using JetBrains.ReSharper.Psi.CSharp.Tree;
 
 using JetBrains.ReSharper.Feature.Services.Daemon;
 
-namespace ReSharper.Exceptional;
+namespace ExceptionAnalyzer;
 
 /// <summary>This process is executed by the ReSharper's Daemon</summary>
 /// <remarks>The instance of this class is constructed each time the daemon needs to re highlight a given file. 

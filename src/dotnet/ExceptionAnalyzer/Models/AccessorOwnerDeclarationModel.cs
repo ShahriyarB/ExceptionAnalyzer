@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
-using ReSharper.Exceptional.Analyzers;
+using ExceptionAnalyzer.Analyzers;
 
-namespace ReSharper.Exceptional.Models;
+namespace ExceptionAnalyzer.Models;
 
 internal class AccessorOwnerDeclarationModel : AnalyzeUnitModelBase<IAccessorOwnerDeclaration>
 {

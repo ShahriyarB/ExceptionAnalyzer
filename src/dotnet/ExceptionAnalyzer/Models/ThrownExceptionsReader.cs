@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
+using ExceptionAnalyzer.Models.ExceptionsOrigins;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
-using ReSharper.Exceptional.Models.ExceptionsOrigins;
 
-namespace ReSharper.Exceptional.Models;
+namespace ExceptionAnalyzer.Models;
 
 /// <summary>Extracts thrown exceptions. </summary>
 internal static class ThrownExceptionsReader

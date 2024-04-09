@@ -4,14 +4,14 @@ using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 using JetBrains.ReSharper.Psi.VB.Tree;
-using ReSharper.Exceptional.Analyzers;
-using ReSharper.Exceptional.Utilities;
+using ExceptionAnalyzer.Analyzers;
+using ExceptionAnalyzer.Utilities;
 using IBlock = JetBrains.ReSharper.Psi.CSharp.Tree.IBlock;
 using ICatchVariableDeclaration = JetBrains.ReSharper.Psi.CSharp.Tree.ICatchVariableDeclaration;
 using IThrowStatement = JetBrains.ReSharper.Psi.CSharp.Tree.IThrowStatement;
 using ITryStatement = JetBrains.ReSharper.Psi.CSharp.Tree.ITryStatement;
 
-namespace ReSharper.Exceptional.Models;
+namespace ExceptionAnalyzer.Models;
 
 using System.Linq;
 

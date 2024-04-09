@@ -1,7 +1,8 @@
-using ReSharper.Exceptional.Highlightings;
-using ReSharper.Exceptional.Models;
+using ExceptionAnalyzer;
+using ExceptionAnalyzer.Highlightings;
+using ExceptionAnalyzer.Models;
 
-namespace ReSharper.Exceptional.Analyzers;
+namespace ExceptionAnalyzer.Analyzers;
 
 /// <summary>Analyzes a catch clause and checks if it is not catch-all clause.</summary>
 internal class CatchAllClauseAnalyzer : AnalyzerBase

@@ -7,8 +7,10 @@ using JetBrains.IDE.UI.Options;
 using JetBrains.Lifetimes;
 using JetBrains.Rd.Base;
 using JetBrains.Util;
+using ExceptionAnalyzer;
+using ExceptionAnalyzer.Settings;
 
-namespace ReSharper.Exceptional.Options;
+namespace ExceptionAnalyzer.Options;
 
 [OptionsPage(Pid, Name, typeof(UnnamedThemedIcons.ExceptionalSettings), ParentId = ExceptionalOptionsPage.Pid, Sequence = 3.0)]
 public class ExceptionTypesAsHintForMethodOrPropertyOptionsPage : BeSimpleOptionsPage
@@ -32,7 +34,7 @@ public class ExceptionTypesAsHintForMethodOrPropertyOptionsPage : BeSimpleOption
 
     private void ShowPredefined()
     {
-            string content = ReSharper.Exceptional.Settings.ExceptionalSettings.DefaultOptionalMethodExceptions;
+            string content = Settings.ExceptionalSettings.DefaultOptionalMethodExceptions;
 
             MessageBox.ShowInfo(content);
         }
@@ -40,28 +42,28 @@ public class ExceptionTypesAsHintForMethodOrPropertyOptionsPage : BeSimpleOption
     private void CreateCheckboxUsePredefined(Lifetime lifetime, IContextBoundSettingsStoreLive storeOptionsTransactionContext)
     {
             IProperty<bool> property = new Property<bool>(lifetime, "Exceptional::ExceptionTypesAsHintForMethodsOrProperties::UsePredefined");
-            property.SetValue(storeOptionsTransactionContext.GetValue((Settings.ExceptionalSettings key) => key.UseDefaultOptionalMethodExceptions2));
+            property.SetValue(storeOptionsTransactionContext.GetValue((ExceptionalSettings key) => key.UseDefaultOptionalMethodExceptions2));
 
             property.Change.Advise(lifetime, a =>
             {
                 if (!a.HasNew) return;
                 
-                storeOptionsTransactionContext.SetValue((Settings.ExceptionalSettings key) => key.UseDefaultOptionalMethodExceptions2, a.New);
+                storeOptionsTransactionContext.SetValue((ExceptionalSettings key) => key.UseDefaultOptionalMethodExceptions2, a.New);
             });
 
-            AddBoolOption((Settings.ExceptionalSettings key) => key.UseDefaultOptionalMethodExceptions2, OptionsLabels.ExceptionTypesAsHintForMethodOrProperty.UsePredefined);
+            AddBoolOption((ExceptionalSettings key) => key.UseDefaultOptionalMethodExceptions2, OptionsLabels.ExceptionTypesAsHintForMethodOrProperty.UsePredefined);
         }
 
     private void CreateRichTextExceptionTypesAsHint(Lifetime lifetime, IContextBoundSettingsStoreLive storeOptionsTransactionContext)
     {
             IProperty<string> property = new Property<string>(lifetime, "Exceptional::ExceptionTypesAsHintForMethodsOrProperties::ExceptionTypes");
-            property.SetValue(storeOptionsTransactionContext.GetValue((Settings.ExceptionalSettings key) => key.OptionalMethodExceptions2));
+            property.SetValue(storeOptionsTransactionContext.GetValue((ExceptionalSettings key) => key.OptionalMethodExceptions2));
 
             property.Change.Advise(lifetime, a =>
             {
                 if (!a.HasNew) return;
 
-                storeOptionsTransactionContext.SetValue((Settings.ExceptionalSettings key) => key.OptionalMethodExceptions2, a.New);
+                storeOptionsTransactionContext.SetValue((ExceptionalSettings key) => key.OptionalMethodExceptions2, a.New);
             });
 
             var textControl = BeControls.GetTextControl(isReadonly:false);
@@ -69,7 +71,7 @@ public class ExceptionTypesAsHintForMethodOrPropertyOptionsPage : BeSimpleOption
             textControl.Text.SetValue(property.GetValue());
             textControl.Text.Change.Advise(lifetime, str =>
             {
-                storeOptionsTransactionContext.SetValue((Settings.ExceptionalSettings key) => key.OptionalMethodExceptions2, str);
+                storeOptionsTransactionContext.SetValue((ExceptionalSettings key) => key.OptionalMethodExceptions2, str);
             });
 
             AddControl(textControl);

@@ -2,7 +2,7 @@ using System;
 using JetBrains.DocumentModel;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 
-namespace ReSharper.Exceptional.Highlightings;
+namespace ExceptionAnalyzer.Highlightings;
 
 /// <summary>Base class for all highlightings.</summary>
 /// <remarks>Provides default implementation.</remarks>

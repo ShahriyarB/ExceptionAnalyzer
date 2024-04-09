@@ -1,9 +1,10 @@
 using System;
 using JetBrains.ReSharper.Psi;
 using JetBrains.Util.Logging;
-using ReSharper.Exceptional.Models;
+using ExceptionAnalyzer.Models;
+using ExceptionAnalyzer;
 
-namespace ReSharper.Exceptional.Settings;
+namespace ExceptionAnalyzer.Settings;
 
 public class OptionalMethodExceptionConfiguration
 {

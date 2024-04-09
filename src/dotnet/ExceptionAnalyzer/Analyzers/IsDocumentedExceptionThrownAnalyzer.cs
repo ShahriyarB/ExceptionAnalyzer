@@ -1,8 +1,9 @@
 using System.Linq;
-using ReSharper.Exceptional.Highlightings;
-using ReSharper.Exceptional.Models;
+using ExceptionAnalyzer;
+using ExceptionAnalyzer.Highlightings;
+using ExceptionAnalyzer.Models;
 
-namespace ReSharper.Exceptional.Analyzers;
+namespace ExceptionAnalyzer.Analyzers;
 
 /// <summary>Analyzes an exception documentation and checks if it is thrown from the documented element.</summary>
 internal class IsDocumentedExceptionThrownAnalyzer : AnalyzerBase

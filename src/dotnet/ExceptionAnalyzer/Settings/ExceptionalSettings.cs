@@ -5,8 +5,9 @@ using JetBrains.Application.Settings;
 using JetBrains.Application.Settings.WellKnownRootKeys;
 using JetBrains.ReSharper.Psi;
 using JetBrains.Util.Logging;
+using ExceptionAnalyzer;
 
-namespace ReSharper.Exceptional.Settings;
+namespace ExceptionAnalyzer.Settings;
 
 [SettingsKey(typeof(EnvironmentSettings), "Exceptional Settings")]
 public class ExceptionalSettings

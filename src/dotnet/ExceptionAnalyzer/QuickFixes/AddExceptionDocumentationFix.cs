@@ -1,18 +1,17 @@
 using System;
-using ExceptionAnalyzer;
 using JetBrains.Application.Progress;
 using JetBrains.DocumentModel;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.Hotspots;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.LiveTemplates;
 using JetBrains.TextControl;
-using ReSharper.Exceptional.Highlightings;
-using ReSharper.Exceptional.Models;
+using ExceptionAnalyzer.Highlightings;
+using ExceptionAnalyzer.Models;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.Templates;
 using JetBrains.ReSharper.Feature.Services.QuickFixes;
 using JetBrains.ReSharper.Resources.Shell;
 
-namespace ReSharper.Exceptional.QuickFixes;
+namespace ExceptionAnalyzer.QuickFixes;
 
 //[QuickFix(null, BeforeOrAfter.Before)]
 [QuickFix()]

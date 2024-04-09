@@ -5,9 +5,9 @@ using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Resolve;
 using JetBrains.ReSharper.Psi.Util;
 using JetBrains.Util;
-using ReSharper.Exceptional.Analyzers;
+using ExceptionAnalyzer.Analyzers;
 
-namespace ReSharper.Exceptional.Models.ExceptionsOrigins;
+namespace ExceptionAnalyzer.Models.ExceptionsOrigins;
 
 internal class ReferenceExpressionModel : ExpressionExceptionsOriginModelBase<IReferenceExpression>
 {

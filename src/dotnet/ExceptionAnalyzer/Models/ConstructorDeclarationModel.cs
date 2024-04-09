@@ -1,10 +1,10 @@
 using System.Linq;
+using ExceptionAnalyzer.Models.ExceptionsOrigins;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Util;
-using ReSharper.Exceptional.Models.ExceptionsOrigins;
 
-namespace ReSharper.Exceptional.Models;
+namespace ExceptionAnalyzer.Models;
 
 /// <summary>Stores data about processed <see cref="IConstructorDeclaration"/></summary>
 internal class ConstructorDeclarationModel : AnalyzeUnitModelBase<IConstructorDeclaration>

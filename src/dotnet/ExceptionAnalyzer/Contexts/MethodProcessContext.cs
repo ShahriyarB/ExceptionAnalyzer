@@ -1,6 +1,6 @@
-using ReSharper.Exceptional.Models;
+using ExceptionAnalyzer.Models;
 
-namespace ReSharper.Exceptional.Contexts;
+namespace ExceptionAnalyzer.Contexts;
 
 internal class MethodProcessContext : ProcessContext<MethodDeclarationModel>
 {

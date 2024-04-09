@@ -2,9 +2,9 @@ using System;
 using JetBrains.Application.Progress;
 using JetBrains.ProjectModel;
 using JetBrains.TextControl;
-using ReSharper.Exceptional.Highlightings;
+using ExceptionAnalyzer.Highlightings;
 using JetBrains.ReSharper.Feature.Services.QuickFixes;
-using ReSharper.Exceptional.QuickFixes;
+using ExceptionAnalyzer.QuickFixes;
 
 namespace ExceptionAnalyzer.QuickFixes;
 

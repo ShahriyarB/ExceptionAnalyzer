@@ -1,7 +1,7 @@
 using JetBrains.DocumentModel;
-using ReSharper.Exceptional.Analyzers;
+using ExceptionAnalyzer.Analyzers;
 
-namespace ReSharper.Exceptional.Models;
+namespace ExceptionAnalyzer.Models;
 
 internal abstract class ModelBase
 {

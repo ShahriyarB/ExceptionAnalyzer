@@ -8,10 +8,11 @@ using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.ExtensionsAPI;
 using JetBrains.ReSharper.Psi.Resolve;
 using JetBrains.ReSharper.Psi.Tree;
-using ReSharper.Exceptional.Analyzers;
-using ReSharper.Exceptional.Models.ExceptionsOrigins;
+using ExceptionAnalyzer.Analyzers;
+using ExceptionAnalyzer.Models.ExceptionsOrigins;
+using ExceptionAnalyzer;
 
-namespace ReSharper.Exceptional.Models;
+namespace ExceptionAnalyzer.Models;
 
 /// <summary>Stores data about processed <see cref="IDocCommentBlockNode"/>. </summary>
 internal class DocCommentBlockModel : TreeElementModelBase<IDocCommentBlock>

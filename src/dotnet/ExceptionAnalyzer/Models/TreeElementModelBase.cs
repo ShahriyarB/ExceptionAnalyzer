@@ -2,7 +2,7 @@ using JetBrains.DocumentModel;
 using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.ReSharper.Psi.Tree;
 
-namespace ReSharper.Exceptional.Models;
+namespace ExceptionAnalyzer.Models;
 
 internal abstract class TreeElementModelBase<T> 
     : ModelBase where T : ITreeNode

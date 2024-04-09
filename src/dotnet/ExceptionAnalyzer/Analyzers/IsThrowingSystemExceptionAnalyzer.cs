@@ -1,7 +1,8 @@
-using ReSharper.Exceptional.Highlightings;
-using ReSharper.Exceptional.Models;
+using ExceptionAnalyzer;
+using ExceptionAnalyzer.Highlightings;
+using ExceptionAnalyzer.Models;
 
-namespace ReSharper.Exceptional.Analyzers;
+namespace ExceptionAnalyzer.Analyzers;
 
 /// <summary>
 /// Analyzes whether a throw statement throws System.Exception.

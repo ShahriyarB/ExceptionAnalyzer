@@ -3,7 +3,7 @@ using ExceptionAnalyzer;
 using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 
-namespace ReSharper.Exceptional.Highlightings;
+namespace ExceptionAnalyzer.Highlightings;
 
 [RegisterConfigurableSeverity(Id, Constants.CompoundName, HighlightingGroupIds.BestPractice,
     "Exceptional.ThrowingSystemException",

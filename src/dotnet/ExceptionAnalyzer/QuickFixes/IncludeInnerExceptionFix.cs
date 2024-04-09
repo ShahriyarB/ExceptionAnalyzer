@@ -4,11 +4,11 @@ using JetBrains.Application.Progress;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.TextControl;
-using ReSharper.Exceptional.Highlightings;
-using ReSharper.Exceptional.Utilities;
+using ExceptionAnalyzer.Highlightings;
+using ExceptionAnalyzer.Utilities;
 using JetBrains.ReSharper.Feature.Services.QuickFixes;
 
-namespace ReSharper.Exceptional.QuickFixes;
+namespace ExceptionAnalyzer.QuickFixes;
 
 [QuickFix]
 internal class IncludeInnerExceptionFix : SingleActionFix

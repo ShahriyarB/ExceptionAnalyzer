@@ -1,8 +1,9 @@
 using System;
 using JetBrains.ReSharper.Psi;
 using JetBrains.Util.Logging;
+using ExceptionAnalyzer;
 
-namespace ReSharper.Exceptional.Settings;
+namespace ExceptionAnalyzer.Settings;
 
 public class ExceptionAccessorOverride
 {

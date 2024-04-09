@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using System.Linq;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
-using ReSharper.Exceptional.Analyzers;
-using ReSharper.Exceptional.Utilities;
+using ExceptionAnalyzer.Analyzers;
+using ExceptionAnalyzer.Utilities;
 
-namespace ReSharper.Exceptional.Models;
+namespace ExceptionAnalyzer.Models;
 
 /// <summary>Describes a try statement. </summary>
 internal class TryStatementModel : BlockModelBase<ITryStatement>

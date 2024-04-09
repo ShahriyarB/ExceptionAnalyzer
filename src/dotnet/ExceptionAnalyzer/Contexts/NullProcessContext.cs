@@ -1,8 +1,8 @@
 ﻿using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
-using ReSharper.Exceptional.Models;
+using ExceptionAnalyzer.Models;
 
-namespace ReSharper.Exceptional.Contexts;
+namespace ExceptionAnalyzer.Contexts;
 
 internal class NullProcessContext : IProcessContext
 {

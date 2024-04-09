@@ -1,4 +1,4 @@
-using ReSharper.Exceptional.Settings;
+using ExceptionAnalyzer.Settings;
 using JetBrains.Application.BuildScript.Application.Zones;
 using JetBrains.Application.Settings;
 using JetBrains.ReSharper.Feature.Services;
@@ -9,7 +9,7 @@ using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 
-namespace ReSharper.Exceptional;
+namespace ExceptionAnalyzer;
 
 [ZoneMarker]
 public class ZoneMarker : IPsiLanguageZone, IRequire<ILanguageCSharpZone>, IRequire<ICodeEditingZone>, IRequire<DaemonZone>, IRequire<NavigationZone>

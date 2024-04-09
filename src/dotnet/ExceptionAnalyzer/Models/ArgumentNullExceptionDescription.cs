@@ -1,4 +1,4 @@
-namespace ReSharper.Exceptional.Models;
+namespace ExceptionAnalyzer.Models;
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

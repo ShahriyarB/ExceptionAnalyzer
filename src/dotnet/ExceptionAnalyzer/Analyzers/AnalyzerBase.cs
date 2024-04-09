@@ -1,7 +1,7 @@
-using ReSharper.Exceptional.Models;
-using ReSharper.Exceptional.Models.ExceptionsOrigins;
+using ExceptionAnalyzer.Models;
+using ExceptionAnalyzer.Models.ExceptionsOrigins;
 
-namespace ReSharper.Exceptional.Analyzers;
+namespace ExceptionAnalyzer.Analyzers;
 
 /// <summary>A base class for all analyzers.</summary>
 internal abstract class AnalyzerBase

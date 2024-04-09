@@ -6,10 +6,10 @@ using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 using JetBrains.Util;
-using ReSharper.Exceptional.Analyzers;
-using ReSharper.Exceptional.Utilities;
+using ExceptionAnalyzer.Analyzers;
+using ExceptionAnalyzer.Utilities;
 
-namespace ReSharper.Exceptional.Models.ExceptionsOrigins;
+namespace ExceptionAnalyzer.Models.ExceptionsOrigins;
 
 internal class ThrowStatementModel : TreeElementModelBase<IThrowStatement>, IExceptionsOriginModel
 {

@@ -3,10 +3,10 @@ using JetBrains.ReSharper.Daemon.CSharp.Stages;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
-using ReSharper.Exceptional.Contexts;
-using ReSharper.Exceptional.Models;
+using ExceptionAnalyzer.Contexts;
+using ExceptionAnalyzer.Models;
 
-namespace ReSharper.Exceptional;
+namespace ExceptionAnalyzer;
 
 public class ExceptionalRecursiveElementProcessor : IRecursiveElementProcessor
 {

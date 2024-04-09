@@ -1,4 +1,4 @@
-﻿namespace ReSharper.Exceptional;
+﻿namespace ExceptionAnalyzer;
 
 public static class Constants
 {

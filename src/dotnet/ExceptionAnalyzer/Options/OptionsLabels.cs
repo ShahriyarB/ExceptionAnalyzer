@@ -1,4 +1,4 @@
-﻿namespace ReSharper.Exceptional.Options;
+﻿namespace ExceptionAnalyzer.Options;
 
 public static class OptionsLabels
 {

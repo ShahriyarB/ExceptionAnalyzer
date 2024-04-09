@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using JetBrains.DocumentModel;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.Tree;
-using ReSharper.Exceptional.Analyzers;
+using ExceptionAnalyzer.Analyzers;
 
-namespace ReSharper.Exceptional.Models.ExceptionsOrigins;
+namespace ExceptionAnalyzer.Models.ExceptionsOrigins;
 
 /// <summary>Describes a location where exceptions can be thrown. </summary>
 internal interface IExceptionsOriginModel
