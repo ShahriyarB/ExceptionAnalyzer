@@ -1,6 +1,5 @@
 using System;
 using JetBrains.ReSharper.Psi;
-using JetBrains.ReSharper.Psi.Modules;
 using JetBrains.Util.Logging;
 
 namespace ReSharper.Exceptional.Settings

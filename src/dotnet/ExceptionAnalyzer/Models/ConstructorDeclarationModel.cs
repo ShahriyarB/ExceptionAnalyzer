@@ -3,7 +3,6 @@ using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Util;
 using ReSharper.Exceptional.Models.ExceptionsOrigins;
-using ReSharper.Exceptional.Settings;
 
 namespace ReSharper.Exceptional.Models
 {

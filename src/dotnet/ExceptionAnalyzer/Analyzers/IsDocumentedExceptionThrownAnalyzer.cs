@@ -1,6 +1,4 @@
 using System.Linq;
-using JetBrains.ReSharper.Daemon;
-using JetBrains.ReSharper.Feature.Services.Daemon;
 using ReSharper.Exceptional.Highlightings;
 using ReSharper.Exceptional.Models;
 

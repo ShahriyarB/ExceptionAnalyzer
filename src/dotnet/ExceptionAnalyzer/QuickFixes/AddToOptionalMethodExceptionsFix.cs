@@ -1,10 +1,3 @@
-using System;
-using JetBrains.Application.Progress;
-using JetBrains.ProjectModel;
-using JetBrains.ReSharper.Feature.Services.Bulbs;
-using JetBrains.TextControl;
-using ReSharper.Exceptional.Highlightings;
-
 namespace ReSharper.Exceptional.QuickFixes
 {
     // TODO: Implement AddToOptionalMethodExceptionsFix

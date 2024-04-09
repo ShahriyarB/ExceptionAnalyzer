@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using JetBrains.ReSharper.Daemon;
+﻿using System.Collections.Generic;
 using JetBrains.ReSharper.Daemon.CSharp.Stages;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 using ReSharper.Exceptional.Contexts;
 using ReSharper.Exceptional.Models;
-using ReSharper.Exceptional.Settings;
-
-using JetBrains.ReSharper.Feature.Services.Daemon;
 
 namespace ReSharper.Exceptional
 {

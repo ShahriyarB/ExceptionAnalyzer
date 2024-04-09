@@ -1,7 +1,6 @@
 using System;
 using JetBrains.DocumentModel;
 using JetBrains.ReSharper.Psi;
-using JetBrains.ReSharper.Psi.Modules;
 using JetBrains.ReSharper.Psi.Tree;
 using JetBrains.Util;
 using ReSharper.Exceptional.Analyzers;

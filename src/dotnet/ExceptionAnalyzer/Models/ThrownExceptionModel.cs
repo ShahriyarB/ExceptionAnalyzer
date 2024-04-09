@@ -5,7 +5,6 @@ using JetBrains.DocumentModel;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
-using JetBrains.ReSharper.Psi.Util;
 using ReSharper.Exceptional.Analyzers;
 using ReSharper.Exceptional.Models.ExceptionsOrigins;
 

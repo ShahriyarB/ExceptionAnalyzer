@@ -1,12 +1,10 @@
 using System.Collections.Generic;
-using JetBrains.ReSharper.Daemon.CSharp.Stages;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 using JetBrains.Util.Logging;
 using ReSharper.Exceptional.Analyzers;
 using ReSharper.Exceptional.Models;
 using ReSharper.Exceptional.Models.ExceptionsOrigins;
-using ReSharper.Exceptional.Settings;
 
 namespace ReSharper.Exceptional.Contexts
 {

@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using ReSharper.Exceptional.Analyzers;
-using ReSharper.Exceptional.Settings;
 
 namespace ReSharper.Exceptional.Models
 {

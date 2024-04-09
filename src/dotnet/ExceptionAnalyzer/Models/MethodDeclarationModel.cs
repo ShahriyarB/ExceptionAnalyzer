@@ -1,5 +1,4 @@
 using JetBrains.ReSharper.Psi.CSharp.Tree;
-using ReSharper.Exceptional.Settings;
 
 namespace ReSharper.Exceptional.Models
 {

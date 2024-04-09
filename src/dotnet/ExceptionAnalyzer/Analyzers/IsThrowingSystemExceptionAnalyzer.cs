@@ -1,11 +1,8 @@
-using JetBrains.ReSharper.Daemon;
-using JetBrains.ReSharper.Feature.Services.Daemon;
 using ReSharper.Exceptional.Highlightings;
 using ReSharper.Exceptional.Models;
 
 namespace ReSharper.Exceptional.Analyzers
 {
-    using JetBrains.DocumentModel;
 
     /// <summary>
     /// Analyzes whether a throw statement throws System.Exception.

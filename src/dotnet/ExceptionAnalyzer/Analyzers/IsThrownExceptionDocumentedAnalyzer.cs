@@ -1,7 +1,5 @@
 using System.Linq;
 using System.Text.RegularExpressions;
-using JetBrains.ReSharper.Daemon;
-using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi;
 using ReSharper.Exceptional.Highlightings;
 using ReSharper.Exceptional.Models;
